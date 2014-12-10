@@ -6,44 +6,75 @@
  */
 package com.insa.tp3g1.esbsimulator.presenter;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 
-import com.insa.tp3g1.esbsimulator.model.scenario.Scenario;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 /**
  * Class used to build a XML Scenario
- * To write a scenario in a file, just use the createScenarioFile method
- * @author Louis
+ * To write a scenario in a file, just use the createXmlFileFromObject method
+ * @author Mike
  */
 public class BuilderHandler  implements ErrorHandler {
+
 	/**
-	 * A scenario
-	 */
-    private Scenario scenario;
-    
-    public BuilderHandler(Scenario scenario) {
-		super();
-		this.scenario = scenario;
+         * Write the scenario in the appropriate file.
+         * @param file
+         * @param o 
+         */
+	public static void createXmlFileFromObject(File file, Object o) {
+		if(o == null) {
+			return;
+		}
+	 	
+		try {
+			JAXBContext context = JAXBContext.newInstance(o.getClass());
+			Marshaller m = context.createMarshaller();
+			//for pretty-print XML in JAXB
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+			// Write to System.out for debugging
+			m.marshal(o, System.out);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			//ouverture fichier
+			PrintStream printStream = new PrintStream(file);
+			PrintStream console = System.out;
+	
+			//rediriger sortie standard pour utiliser la fonction printXML (modularite)
+			System.setOut(printStream);
+			toXML(o);//display on sta,dard output redirected
+	
+			//rediriger sortie standard normal (console)
+			printStream.close();
+			System.setOut(console);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * Write the scenario in the appropriate file.<br/> Example of use : createScenarioFile("Scenario.xml");
-	 * @param filepath path of the file. If no path is given, like "Scenario.xml", the file will be created in the local folder
+	 * Display XML content for Object o on the standard output.
+	 * @param o
 	 */
-	public void createScenarioFile(String filepath){
-    	try {
-			scenario.writeScenario(filepath);
-		} catch (FileNotFoundException e) {
-			fileNotFoundException(e);
+	public static void toXML(Object o){
+		try {
+			JAXBContext context = JAXBContext.newInstance(o.getClass());
+			Marshaller m = context.createMarshaller();
+			//for pretty-print XML in JAXB
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+			// Write to System.out
+			m.marshal(o, System.out);
+		} catch (JAXBException e) {
+			e.printStackTrace();
 		}
-    }
-	
-	/**
-	 * When a file is not found
-	 */
-	private void fileNotFoundException(FileNotFoundException e){
-		System.err.println("BuilderHandler Error : File not found");
-		e.printStackTrace();
 	}
-	
 }

@@ -8,29 +8,16 @@
             <name>COCO</name>
             <port>92</port>
             <protocol>SOAP</protocol>
-            <producerId>13</producerId>
             <requestBySeconde>0</requestBySeconde>
         </consumers>
-        <consumers id="57">
-            <name>COCO</name>
-            <port>92</port>
+        <consumers id="82">
+            <name>CACA</name>
+            <port>100</port>
             <protocol>SOAP</protocol>
-            <producerId>13</producerId>
-            <requestBySeconde>0</requestBySeconde>
+            <requestBySeconde>1</requestBySeconde>
         </consumers>
     </consumers>
     <providers>
-        <providers id="28">
-            <name>CICI</name>
-            <port>92</port>
-            <protocol>SOAP</protocol>
-            <dataExchangeSize typeBehavior="byte">
-                <content>10</content>
-            </dataExchangeSize>
-            <processingTime timeUnit="ms">
-                <content>15</content>
-            </processingTime>
-        </providers>
         <providers id="28">
             <name>CICI</name>
             <port>92</port>

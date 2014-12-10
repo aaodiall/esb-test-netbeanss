@@ -44,12 +44,6 @@ public abstract class ConsumerProvider {
 		//this.behavior = behavior;
 		this.name = name;
 	}
-    
-	/**
-	 * Print the corresponding producer/consumer in XML
-	 */
-	public abstract void printXML();
-
 	
 	@XmlAttribute
 	public int getId() {

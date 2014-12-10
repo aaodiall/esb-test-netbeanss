@@ -6,10 +6,39 @@
  */
 package com.insa.tp3g1.esbsimulator.presenter;
 
+import java.io.File;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
 /**
  *
- * @author alpha
+ * @author Mike
  */
-public class ParserHandler implements ErrorHandler {
+public class ParserHandler {
+	
+        /**
+         * parse an XmlFile and
+         * return an instance of an Object specified by the Class c
+         * @param xmlFile
+         * @param c
+         * @return 
+         */
+	public static Object getInstanceFromXmlFile(File xmlFile, Class<?> c) {
+		Object o = new Object();
+		try {
+			//create JAXBContext and Unmarshaller
+			JAXBContext context = JAXBContext.newInstance(c);
+			Unmarshaller u = context.createUnmarshaller();
+	
+			//create object from XML
+			o = u.unmarshal(xmlFile);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+		
+		return o;
+	}
     
 }
