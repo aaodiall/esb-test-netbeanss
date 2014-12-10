@@ -1,0 +1,61 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="scenario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="name"/>
+        <xs:element type="xs:byte" name="numberConsumer"/>
+        <xs:element type="xs:byte" name="numberProvider"/>
+        <xs:element name="consumers">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="consumers" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="name"/>
+                    <xs:element type="xs:byte" name="port"/>
+                    <xs:element type="xs:string" name="protocol"/>
+                    <xs:element type="xs:byte" name="requestBySeconde"/>
+                  </xs:sequence>
+                  <xs:attribute type="xs:byte" name="id" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="providers">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="providers">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="name"/>
+                    <xs:element type="xs:byte" name="port"/>
+                    <xs:element type="xs:string" name="protocol"/>
+                    <xs:element name="dataExchangeSize">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:byte" name="content"/>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="typeBehavior"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="processingTime">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:byte" name="content"/>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="timeUnit"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:byte" name="id"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:byte" name="id"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

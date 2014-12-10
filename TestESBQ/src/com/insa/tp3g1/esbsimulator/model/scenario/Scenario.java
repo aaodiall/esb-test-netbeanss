@@ -8,6 +8,7 @@ package com.insa.tp3g1.esbsimulator.model.scenario;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -35,12 +36,12 @@ public class Scenario {
 	/**
 	 * Array of the providers
 	 */
-    private Provider[] providers;
+    private ArrayList<Provider> providers;
     
     /**
      * Array of the consumers
      */
-    private Consumer[] consumers;
+    private ArrayList<Consumer> consumers;
     
     /**
      * Number of consumers
@@ -58,8 +59,8 @@ public class Scenario {
     private String name;
     
 
-    public Scenario(int id, Provider[] providers, int numberConsumer,
-			int numberProvider, String name, Consumer[] consumers) {
+    public Scenario(int id, ArrayList<Provider> providers, int numberConsumer,
+			int numberProvider, String name, ArrayList<Consumer> consumers) {
 		super();
 		this.id = id;
 		this.providers = providers;
@@ -71,46 +72,6 @@ public class Scenario {
     
     public Scenario(){
     	
-    }
-
-    /**
-     * Print the scenario in XML
-     */
-	public void printXML(){
-        try {
-            JAXBContext context = JAXBContext.newInstance(Scenario.class);
-            Marshaller m = context.createMarshaller();
-            //for pretty-print XML in JAXB
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
- 
-            // Write to System.out for debugging
-             m.marshal(this, System.out);
- 
-
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-    }
-	
-	/**
-	 * Write the scenario in the appropriate file.<br/> Example of use : writeScenario("Scenario.xml");
-	 * @param filepath path of the file. If no path is given, like "Scenario.xml", the file will be created in the local folder
-	 * @throws FileNotFoundException 
-	 */
-	public void writeScenario(String filepath) throws FileNotFoundException{
-        
-        //ouvrir le fichier
-        File file = new File(filepath);
-            PrintStream printStream = new PrintStream(file);
-            PrintStream console = System.out;
-            
-          //rediriger sortie standard pour utiliser la fonction printXML (modularite)
-            System.setOut(printStream);
-            this.printXML();
-            
-            //rediriger sortie standard normal (console)
-            printStream.close();
-            System.setOut(console);
     }
 
 	@XmlAttribute
@@ -156,21 +117,21 @@ public class Scenario {
     }
     
 	
-    public Provider[] getProviders() {
+    public ArrayList<Provider> getProviders() {
         return providers;
     }
     
     @XmlElementWrapper(name = "providers") 
-    public void setProviders(Provider[] providers) {
+    public void setProviders(ArrayList<Provider> providers) {
         this.providers = providers;
     }
 
     @XmlElementWrapper(name = "consumers")
-    public Consumer[] getConsumers() {
+    public ArrayList<Consumer> getConsumers() {
         return consumers;
     }
 
-    public void setConsumers(Consumer[] consumers) {
+    public void setConsumers(ArrayList<Consumer> consumers) {
         this.consumers = consumers;
     }
 

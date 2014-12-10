@@ -62,25 +62,5 @@ public class Provider extends ConsumerProvider{
 	public void setProcessingTime(ProcessingTime processingTime) {
 		this.processingTime = processingTime;
 	}
-	
-	/**
-	 * Print the xml of the consumer to the standard output stream <br/>
-	 * Mainly used for debugged purposes
-	 */
-	public void printXML() {
-		try {
-			JAXBContext context = JAXBContext.newInstance(Provider.class);
-			Marshaller m = context.createMarshaller();
-			//for pretty-print XML in JAXB
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-			// Write to System.out for debugging
-			m.marshal(this, System.out);
-
-
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
-	}
 
 }
