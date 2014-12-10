@@ -5,17 +5,42 @@
  */
 package com.insa.tp3g1.esbsimulator.model.result;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 /**
  *
- * @author alpha
+ * @authors alpha, Julie
  */
 public class ResponseTime {
+    
+    /**
+     * Attributes
+     */
+    
     private String timeUnit;
 
     private String maxResponseTime;
 
     private String minResponseTime;
+    
+    /**
+     * Constructor
+     * @param timeUnit
+     * @param maxResponseTime
+     * @param minResponseTime 
+     */
+    public ResponseTime(String timeUnit, String maxResponseTime, String minResponseTime) {
+        this.setTimeUnit(timeUnit);
+        this.setMaxResponseTime(maxResponseTime);
+        this.setMinResponseTime(minResponseTime);
+    }
 
+    /**
+     * Getters and setters
+     * @return 
+     */
+    
+    @XmlAttribute
     public String getTimeUnit ()
     {
         return timeUnit;

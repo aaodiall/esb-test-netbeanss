@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<scenario id="1">
+    <name>scenario</name>
+    <numberConsumer>2</numberConsumer>
+    <numberProvider>2</numberProvider>
+    <consumers>
+        <consumers id="57">
+            <name>COCO</name>
+            <port>92</port>
+            <protocol>SOAP</protocol>
+            <producerId>13</producerId>
+            <requestBySeconde>0</requestBySeconde>
+        </consumers>
+        <consumers id="57">
+            <name>COCO</name>
+            <port>92</port>
+            <protocol>SOAP</protocol>
+            <producerId>13</producerId>
+            <requestBySeconde>0</requestBySeconde>
+        </consumers>
+    </consumers>
+    <providers>
+        <providers id="28">
+            <name>CICI</name>
+            <port>92</port>
+            <protocol>SOAP</protocol>
+            <dataExchangeSize typeBehavior="byte">
+                <content>10</content>
+            </dataExchangeSize>
+            <processingTime timeUnit="ms">
+                <content>15</content>
+            </processingTime>
+        </providers>
+        <providers id="28">
+            <name>CICI</name>
+            <port>92</port>
+            <protocol>SOAP</protocol>
+            <dataExchangeSize typeBehavior="byte">
+                <content>10</content>
+            </dataExchangeSize>
+            <processingTime timeUnit="ms">
+                <content>15</content>
+            </processingTime>
+        </providers>
+    </providers>
+</scenario>

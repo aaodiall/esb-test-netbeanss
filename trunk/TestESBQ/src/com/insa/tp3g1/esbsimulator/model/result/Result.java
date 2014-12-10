@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.*;
  */
 
 @XmlRootElement(name = "Result")
-@XmlType (propOrder={})
+@XmlType (propOrder={"totalResult", "linksConsumerProvider"})
 public class Result {
     
     /**
@@ -38,13 +38,16 @@ public class Result {
     private LinkConsumerProvider[] linksConsumerProvider;
     
     /**
-     * Constructor
+     * Constructors
      * @param totalResult
      * @param linksConsumerProvider 
      */
     public Result( TotalResult totalResult, LinkConsumerProvider[] linksConsumerProvider){
         this.setTotalResult(totalResult);
         this.setLinksConsumerProvider(linksConsumerProvider);
+    }
+    
+    public Result() {
     }
 
     /**
@@ -63,6 +66,7 @@ public class Result {
         return linksConsumerProvider;
     }
 
+    @XmlElementWrapper(name = "linksConsumerProvider")
     public void setLinksConsumerProvider(LinkConsumerProvider[] linksConsumerProvider) {
         this.linksConsumerProvider = linksConsumerProvider;
     }

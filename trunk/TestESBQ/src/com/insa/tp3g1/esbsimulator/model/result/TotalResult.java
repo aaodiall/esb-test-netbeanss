@@ -5,25 +5,51 @@
  */
 package com.insa.tp3g1.esbsimulator.model.result;
 
+import javax.xml.bind.annotation.XmlType;
+
 /**
  *
- * @author alpha
+ * @authors alpha, Julie
  */
+
+@XmlType (propOrder={"responseTime", "averageResponseTime", "lostRequests"})
 public class TotalResult {
-    private String AverageResponseTime;
+    
+    /**
+     * Attributes
+     */
+    
+    private String averageResponseTime;
 
     private String lostRequests;
 
     private ResponseTime responseTime;
+    
+    /**
+     * Constructor
+     * @param averageResponseTime
+     * @param lostRequests
+     * @param responseTime 
+     */
+    public TotalResult(String averageResponseTime, String lostRequests, ResponseTime responseTime) {
+        this.setAverageResponseTime(averageResponseTime);
+        this.setLostRequests(lostRequests);
+        this.setResponseTime(responseTime);
+    }
+    
+    /**
+     * Getters and setters
+     * @return 
+     */
 
     public String getAverageResponseTime ()
     {
-        return AverageResponseTime;
+        return averageResponseTime;
     }
 
-    public void setAverageResponseTime (String AverageResponseTime)
+    public void setAverageResponseTime (String averageResponseTime)
     {
-        this.AverageResponseTime = AverageResponseTime;
+        this.averageResponseTime = averageResponseTime;
     }
 
     public String getLostRequests ()
