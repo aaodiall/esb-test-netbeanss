@@ -18,7 +18,6 @@ public class TestBuilderHandler {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-	System.out.println("ok");
             //Behavior b = new Behavior(2, "ms", 4);
 		ProcessingTime p = new ProcessingTime(15, "ms");
 			DataExchangeSize data = new DataExchangeSize(10, "byte");
@@ -44,6 +43,7 @@ public class TestBuilderHandler {
 			BuilderHandler build = new BuilderHandler(sc);
 			build.createScenarioFile("ScenarBuild.xml");
 			c.printXML();
+                        
 
 
 	}

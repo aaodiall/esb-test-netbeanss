@@ -5,17 +5,45 @@
  */
 package com.insa.tp3g1.esbsimulator.model.result;
 
+import javax.xml.bind.annotation.XmlType;
+
 /**
  *
- * @author alpha
+ * @authors alpha, Julie
  */
+
+@XmlType (propOrder={"consumerId", "providerId", "averageResponseTime"})
 public class LinkConsumerProvider {
+    
+    /**
+     * Attributes
+     */
+    
     private String averageResponseTime;
 
     private String providerId;
 
     private String consumerId;
 
+    /**
+     * Constructor
+     * @param averageResponseTime
+     * @param providerId
+     * @param consumerId 
+     */
+    public LinkConsumerProvider(String averageResponseTime, String consumerId, String providerId) {
+        this.setAverageResponseTime(averageResponseTime);
+        this.setConsumerId(consumerId);
+        this.setProviderId(providerId);
+    }
+
+    
+    
+    /**
+     * Getters and setters
+     * @return 
+     */
+    
     public String getAverageResponseTime ()
     {
         return averageResponseTime;

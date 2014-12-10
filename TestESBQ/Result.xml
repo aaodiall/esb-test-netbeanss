@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Result>
+    <totalResult>
+        <responseTime timeUnit="sec">
+            <maxResponseTime>5</maxResponseTime>
+            <minResponseTime>6</minResponseTime>
+        </responseTime>
+        <averageResponseTime>16</averageResponseTime>
+        <lostRequests>10</lostRequests>
+    </totalResult>
+    <linksConsumerProvider>
+        <linksConsumerProvider>
+            <consumerId>1</consumerId>
+            <providerId>2</providerId>
+            <averageResponseTime>10</averageResponseTime>
+        </linksConsumerProvider>
+        <linksConsumerProvider>
+            <consumerId>3</consumerId>
+            <providerId>4</providerId>
+            <averageResponseTime>20</averageResponseTime>
+        </linksConsumerProvider>
+    </linksConsumerProvider>
+</Result>
