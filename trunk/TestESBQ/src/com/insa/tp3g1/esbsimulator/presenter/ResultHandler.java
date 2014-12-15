@@ -33,7 +33,11 @@ public class ResultHandler implements ErrorHandler {
      */
     public void createResultFile(String filepath){
     	try {
+                if (result != null) {
                     result.writeResult(filepath);
+                }else {
+                    System.out.println("no result");
+                }
             } catch (FileNotFoundException e) {
                     fileNotFoundException(e);
             }
