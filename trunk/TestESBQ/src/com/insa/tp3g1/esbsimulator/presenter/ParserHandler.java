@@ -25,7 +25,8 @@ public class ParserHandler {
          * @param c
          * @return 
          */
-	public static Object getInstanceFromXmlFile(File xmlFile, Class<?> c) {
+	public static Object getInstanceFromXmlFile(File xmlFile, Class<?> c)
+            throws JAXBException {
 		Object o = new Object();
 		try {
 			//create JAXBContext and Unmarshaller
@@ -34,8 +35,8 @@ public class ParserHandler {
 	
 			//create object from XML
 			o = u.unmarshal(xmlFile);
-		} catch (JAXBException e) {
-			e.printStackTrace();
+		} catch (JAXBException ex) {
+                    throw ex;
 		}
 		
 		return o;

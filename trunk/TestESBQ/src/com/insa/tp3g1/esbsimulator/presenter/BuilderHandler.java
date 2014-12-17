@@ -19,16 +19,17 @@ import javax.xml.bind.Marshaller;
  * To write a scenario in a file, just use the createXmlFileFromObject method
  * @author Mike
  */
-public class BuilderHandler  implements ErrorHandler {
+public class BuilderHandler {
 
 	/**
          * Write the scenario in the appropriate file.
          * @param file
          * @param o 
          */
-	public static void createXmlFileFromObject(File file, Object o) {
+	public static void createXmlFileFromObject(File file, Object o)
+            throws FileNotFoundException, JAXBException {
 		if(o == null) {
-			return;
+                    throw new NullPointerException();
 		}
 	 	
 		try {
@@ -40,7 +41,7 @@ public class BuilderHandler  implements ErrorHandler {
 			// Write to System.out for debugging
 			m.marshal(o, System.out);
 		} catch (JAXBException e) {
-			e.printStackTrace();
+                        throw e;
 		}
 		
 		try {
@@ -56,7 +57,7 @@ public class BuilderHandler  implements ErrorHandler {
 			printStream.close();
 			System.setOut(console);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			throw e;
 		}
 	}
 
