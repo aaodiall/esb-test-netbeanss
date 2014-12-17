@@ -11,6 +11,10 @@ import com.insa.tp3g1.esbsimulator.model.scenario.Scenario;
 import com.insa.tp3g1.esbsimulator.presenter.BuilderHandler;
 import com.insa.tp3g1.esbsimulator.presenter.ParserHandler;
 import com.insa.tp3g1.esbsimulator.presenter.ValidatorHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.bind.JAXBException;
+import org.xml.sax.SAXException;
 
 public class TestXML {
 	/**
@@ -31,16 +35,37 @@ public class TestXML {
 		//test build
 		File xmlFile = new File("ScenarBuild.xml");
 		Scenario scenario = new Scenario(1, providers, 2, 2, "scenario", consumers);
-
-		BuilderHandler.createXmlFileFromObject(xmlFile, scenario);
-		
+        
+            try {
+                BuilderHandler.createXmlFileFromObject(xmlFile, scenario);
+            } catch (FileNotFoundException ex) {
+                System.out.print("Error: File not found");
+//                ex.printStackTrace();
+            } catch (JAXBException ex) {
+                System.out.print("Error: JAXB exception - " + ex.getMessage());
+//                ex.printStackTrace();
+            } 
+           	
 		//test validate and parse
 		File xsdFile = new File("scenario.xsd");
-		boolean validationOk = ValidatorHandler.isXmlValidAgainstXsd(xmlFile, xsdFile);
+		boolean validationOk = false;
+           
+            try {
+                validationOk = ValidatorHandler.isXmlValidAgainstXsd(xmlFile, xsdFile);
+            } catch (SAXException ex) {
+                System.out.println("Error: SAX exception - " + ex.getMessage());
+            } catch (IOException ex) {
+                System.out.println("Error: IO exception - " + ex.getMessage());
+            }
+            
 		
 		if(validationOk) {
 			System.out.println("Validation OK");
-			Scenario scCreated = (Scenario) ParserHandler.getInstanceFromXmlFile(xmlFile, Scenario.class);
+                    try {
+                        Scenario scCreated = (Scenario) ParserHandler.getInstanceFromXmlFile(xmlFile, Scenario.class);
+                    } catch (JAXBException ex) {
+                        System.out.println("Error: JAXB exception - " + ex.getMessage());
+                    }
 		}
 		else {
 			System.out.println("Validation error");

@@ -10,6 +10,10 @@ import com.insa.tp3g1.esbsimulator.model.scenario.Scenario;
 import com.insa.tp3g1.esbsimulator.presenter.BuilderHandler;
 import com.insa.tp3g1.esbsimulator.view.HMI;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -22,7 +26,15 @@ public class TestHMI {
         File xmlFile = new File("ScenarBuild.xml");
         HMI hmi = new HMI();
         Scenario scenario = hmi.createScenario();
-        BuilderHandler.createXmlFileFromObject(xmlFile, scenario);
+        try {
+            BuilderHandler.createXmlFileFromObject(xmlFile, scenario);
+        } catch (FileNotFoundException ex) {
+            System.out.print("Error: File not found");
+//                ex.printStackTrace();
+        } catch (JAXBException ex) {
+            System.out.print("Error: JAXB exception - " + ex.getMessage());
+//                ex.printStackTrace();
+        } 
     
     }
     

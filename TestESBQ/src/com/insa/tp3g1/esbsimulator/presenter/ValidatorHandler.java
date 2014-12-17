@@ -7,6 +7,9 @@
 package com.insa.tp3g1.esbsimulator.presenter;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -19,7 +22,7 @@ import org.xml.sax.SAXException;
  *
  * @author Mike
  */
-public class ValidatorHandler implements ErrorHandler  {
+public class ValidatorHandler {
 
         /**
          * Validate an XML file against an XSD file
@@ -27,8 +30,9 @@ public class ValidatorHandler implements ErrorHandler  {
          * @param xsdFile
          * @return 
          */
-	public static boolean isXmlValidAgainstXsd(File xmlFile, File xsdFile) {
-		boolean validationOk = true;
+	public static boolean isXmlValidAgainstXsd(File xmlFile, File xsdFile)
+            throws SAXException, IOException {
+		boolean validationOk = false;
 
 		try {
 			String schemaLang = "http://www.w3.org/2001/XMLSchema";
@@ -39,14 +43,14 @@ public class ValidatorHandler implements ErrorHandler  {
 			Validator validator = schema.newValidator();
 
 			validator.validate(new StreamSource(xmlFile));
+                        validationOk = true;
 
-		} catch (SAXException e) {
-			System.out.println("SAX exception :" + e.getMessage());
-			validationOk = false;
-		} catch (Exception ex) {
-			System.out.println("Exception :" + ex.getMessage());
-			validationOk = false;
-		}
+		} catch (SAXException ex) {
+                    throw ex;
+                    //System.out.println("SAX exception :" + e.getMessage());
+		} catch (IOException ex) {
+                    throw ex;
+                }
 
 		return validationOk;
 	}

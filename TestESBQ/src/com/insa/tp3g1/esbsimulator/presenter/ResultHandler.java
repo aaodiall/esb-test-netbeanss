@@ -14,7 +14,7 @@ import java.io.FileNotFoundException;
  *
  * @authors alpha, Julie
  */
-public class ResultHandler implements ErrorHandler {
+public class ResultHandler {
     
     private Result result;
     
