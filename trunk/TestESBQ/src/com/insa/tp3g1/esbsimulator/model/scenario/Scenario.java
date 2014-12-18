@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Louis
  */
 @XmlRootElement(name = "scenario")
-@XmlType (propOrder={"name","numberConsumer","numberProvider","consumers","providers"})
+@XmlType (propOrder={"name","numberConsumerProvider","consumers","providers"})
 public class Scenario {
 	
 	/**
@@ -44,14 +44,10 @@ public class Scenario {
     private ArrayList<Consumer> consumers;
     
     /**
-     * Number of consumers
+     * Number of consumers & providers
      */
-    private int numberConsumer;
-    
-    /**
-     * Number of providers
-     */
-    private int numberProvider;
+    private int numberConsumerProvider;
+
     
     /**
      * Name of the scenario
@@ -59,13 +55,12 @@ public class Scenario {
     private String name;
     
 
-    public Scenario(int id, ArrayList<Provider> providers, int numberConsumer,
-			int numberProvider, String name, ArrayList<Consumer> consumers) {
+    public Scenario(int id, ArrayList<Provider> providers, int numberConsumerProvider,
+            String name, ArrayList<Consumer> consumers) {
 		super();
 		this.id = id;
 		this.providers = providers;
-		this.numberConsumer = numberConsumer;
-		this.numberProvider = numberProvider;
+		this.numberConsumerProvider = numberConsumerProvider;
 		this.name = name;
 		this.consumers = consumers;
 	}
@@ -86,24 +81,14 @@ public class Scenario {
     }
 
 
-    public int getNumberConsumer ()
+    public int getNumberConsumerProvider ()
     {
-        return numberConsumer;
+        return numberConsumerProvider;
     }
 
-    public void setNumberConsumer (int numberConsumer)
+    public void setNumberConsumerProvider (int numberConsumerProvider)
     {
-        this.numberConsumer = numberConsumer;
-    }
-
-    public int getNumberProvider ()
-    {
-        return numberProvider;
-    }
-
-    public void setNumberProvider (int numberProvider)
-    {
-        this.numberProvider = numberProvider;
+        this.numberConsumerProvider = numberConsumerProvider;
     }
 
     public String getName ()

@@ -10,6 +10,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
@@ -20,8 +21,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "provider")
 @XmlAccessorType (XmlAccessType.FIELD)
-public class Provider extends ConsumerProvider{
+public class Provider {
 
+        /**
+	 * Id of the Consumer/Provider
+	 */
+	private int id;
+    
 	/**
 	 * Data that is exchanged
 	 */
@@ -37,12 +43,20 @@ public class Provider extends ConsumerProvider{
 		
 	}
 	
-	public Provider(int id, int port, String protocol,/* Behavior behavior,*/ProcessingTime processingTime, String name, DataExchangeSize dataExchangeSize ) {
-		super(id, port, protocol,/* behavior,*/ name);
+	public Provider(int id, ProcessingTime processingTime, DataExchangeSize dataExchangeSize ) {
+		this.id = id;
 		this.dataExchangeSize = dataExchangeSize;
 		this.processingTime = processingTime;
 	}
 	
+        
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public DataExchangeSize getDataExchangeSize ()
 	{
