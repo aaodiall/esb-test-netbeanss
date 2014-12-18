@@ -43,62 +43,46 @@ public class HMI {
          String sleep = this.scanner.nextLine();
          String name = this.scanner.nextLine();
 
-        System.out.println("entrer le nombre de consumers: \n");
-        int nbConsumers = this.scanner.nextInt();
+        System.out.println("entrer le nombre de consumers & providers: \n");
+        int nbConsumersProviders = this.scanner.nextInt();
         
         ArrayList<Consumer> consumers = new ArrayList<Consumer>();
         int i;
-        for (i=0; i<nbConsumers; i++) {
+        for (i=0; i<nbConsumersProviders; i++) {
             System.out.println("entrer l'id du consumer : \n");
             int idc = this.scanner.nextInt();
-            System.out.println("entrer le port du consumer : \n");
-            int port = this.scanner.nextInt();
-            System.out.println("entrer le protocol du consumer : \n");
-            sleep = this.scanner.nextLine();
-            String protocol = this.scanner.nextLine();
-            System.out.println("entrer le nom du consumer : \n");
-            String nom = this.scanner.nextLine();
-            System.out.println("entrer l'id du producer : \n");
-            int idcp = this.scanner.nextInt();
             System.out.println("entrer le nombre de requetes par seconde : \n");
             int nbRequest = this.scanner.nextInt();
             
-            consumers.add(new Consumer(idc, port, protocol , nom, idcp, nbRequest));
+            consumers.add(new Consumer(idc, nbRequest));
         }
         
 
         ArrayList<Provider> providers = new ArrayList<Provider>();
         int j;
-        for (j=0; j<nbConsumers; j++) {
+        for (j=0; j<nbConsumersProviders; j++) {
             System.out.println("entrer l'id du provider : \n");
             int idp = this.scanner.nextInt();
-            System.out.println("entrer le port du provider : \n");
-            int portp = this.scanner.nextInt();
-            System.out.println("entrer le protocol du provider : \n");
-            sleep = this.scanner.nextLine();
-            String protocolp = this.scanner.nextLine();
-            System.out.println("entrer le nom du provider : \n");
-            String nomp = this.scanner.nextLine();
             
-            System.out.println("entrer la valeur du processing time: \n");
+            System.out.println("entrer la valeur du processing time : \n");
             int valeurProcessingTime = this.scanner.nextInt();
-            System.out.println("entrer l'unité du processing time: \n");
+            System.out.println("entrer l'unité du processing time : \n");
             sleep = this.scanner.nextLine();
             String uniteProcessingTime = this.scanner.nextLine();
             ProcessingTime p = new ProcessingTime(valeurProcessingTime, uniteProcessingTime);
 
-            System.out.println("entrer la valeur du processing time: \n");
+            System.out.println("entrer la valeur des données échangées : \n");
             int valeurDataExchangeSize = this.scanner.nextInt();
-            System.out.println("entrer l'unité du processing time: \n");
+            System.out.println("entrer l'unité des données échangées : \n");
             sleep = this.scanner.nextLine();
             String uniteDataExchangeSize = this.scanner.nextLine();
             DataExchangeSize data = new DataExchangeSize(valeurDataExchangeSize, uniteDataExchangeSize);
            
-            providers.add(new Provider(idp, portp, protocolp, p, nomp, data)); 
+            providers.add(new Provider(idp, p, data)); 
             
         }
 
-        Scenario scenario = new Scenario(id, providers, nbConsumers,nbConsumers, name, consumers);
+        Scenario scenario = new Scenario(id, providers, nbConsumersProviders, name, consumers);
 
         return(scenario);
     }

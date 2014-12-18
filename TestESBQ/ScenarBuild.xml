@@ -1,32 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <scenario id="1">
-    <name>scenario</name>
-    <numberConsumer>2</numberConsumer>
-    <numberProvider>2</numberProvider>
+    <name>a</name>
+    <numberConsumerProvider>1</numberConsumerProvider>
     <consumers>
-        <consumers id="57">
-            <name>COCO</name>
-            <port>92</port>
-            <protocol>SOAP</protocol>
-            <requestBySeconde>0</requestBySeconde>
-        </consumers>
-        <consumers id="82">
-            <name>CACA</name>
-            <port>100</port>
-            <protocol>SOAP</protocol>
+        <consumers>
+            <id>1</id>
             <requestBySeconde>1</requestBySeconde>
         </consumers>
     </consumers>
     <providers>
-        <providers id="28">
-            <name>CICI</name>
-            <port>92</port>
-            <protocol>SOAP</protocol>
-            <dataExchangeSize typeBehavior="byte">
-                <content>10</content>
+        <providers>
+            <id>1</id>
+            <dataExchangeSize typeBehavior="ms">
+                <content>1</content>
             </dataExchangeSize>
             <processingTime timeUnit="ms">
-                <content>15</content>
+                <content>2</content>
             </processingTime>
         </providers>
     </providers>

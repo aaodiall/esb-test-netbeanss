@@ -3,20 +3,16 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element type="xs:string" name="name"/>
-        <xs:element type="xs:byte" name="numberConsumer"/>
-        <xs:element type="xs:byte" name="numberProvider"/>
+        <xs:element type="xs:byte" name="numberConsumerProvider"/>
         <xs:element name="consumers">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="consumers" maxOccurs="unbounded" minOccurs="0">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element type="xs:string" name="name"/>
-                    <xs:element type="xs:byte" name="port"/>
-                    <xs:element type="xs:string" name="protocol"/>
+                    <xs:element type="xs:byte" name="id"/>
                     <xs:element type="xs:byte" name="requestBySeconde"/>
                   </xs:sequence>
-                  <xs:attribute type="xs:byte" name="id" use="optional"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -28,9 +24,7 @@
               <xs:element name="providers">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element type="xs:string" name="name"/>
-                    <xs:element type="xs:byte" name="port"/>
-                    <xs:element type="xs:string" name="protocol"/>
+                    <xs:element type="xs:byte" name="id"/>
                     <xs:element name="dataExchangeSize">
                       <xs:complexType>
                         <xs:sequence>
@@ -48,7 +42,6 @@
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
-                  <xs:attribute type="xs:byte" name="id"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>

@@ -7,6 +7,7 @@ package com.insa.tp3g1.esbsimulator.model.scenario;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -18,9 +19,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "consumer")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Consumer extends ConsumerProvider {
+public class Consumer {
 
 	/**
+	 * Id of the Consumer/Provider
+	 */
+	private int id;
+        
+        /**
 	 * Request by seconds send by the producer
 	 */
 	private int requestBySeconde;
@@ -29,12 +35,20 @@ public class Consumer extends ConsumerProvider {
 
 	}
 
-	public Consumer(int id, int port, String protocol, String name,
-			int producerId, int requestBySeconde) {
-		super(id, port, protocol, name);
-		this.requestBySeconde = requestBySeconde;
+	public Consumer(int id, int requestBySeconde) {
+		this.id = id;
+                this.requestBySeconde = requestBySeconde;
 	}
 
+        
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+        
 	public int getRequestBySeconde() {
 		return requestBySeconde;
 	}

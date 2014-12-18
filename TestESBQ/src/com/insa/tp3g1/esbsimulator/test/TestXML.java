@@ -22,28 +22,28 @@ public class TestXML {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ProcessingTime p = new ProcessingTime(15, "ms");
+		ProcessingTime processingTime = new ProcessingTime(15, "ms");
 		DataExchangeSize data = new DataExchangeSize(10, "byte");
 
 		ArrayList<Consumer> consumers = new ArrayList<Consumer>();
-		consumers.add(new Consumer(57, 92, "SOAP" , "COCO", 13, 0));
-		consumers.add(new Consumer(82, 100, "SOAP" , "CACA", 12, 1));
+		consumers.add(new Consumer(1, 13));
+		consumers.add(new Consumer(2, 0));
 		
 		ArrayList<Provider> providers = new ArrayList<Provider>();
-		providers.add(new Provider(28, 92, "SOAP", p, "CICI", data));
+		providers.add(new Provider(1, processingTime, data));
 
 		//test build
 		File xmlFile = new File("ScenarBuild.xml");
-		Scenario scenario = new Scenario(1, providers, 2, 2, "scenario", consumers);
+		Scenario scenario = new Scenario(1, providers, 2, "scenario", consumers);
         
             try {
                 BuilderHandler.createXmlFileFromObject(xmlFile, scenario);
             } catch (FileNotFoundException ex) {
                 System.out.print("Error: File not found");
-//                ex.printStackTrace();
+                //ex.printStackTrace();
             } catch (JAXBException ex) {
                 System.out.print("Error: JAXB exception - " + ex.getMessage());
-//                ex.printStackTrace();
+               //ex.printStackTrace();
             } 
            	
 		//test validate and parse
@@ -59,17 +59,17 @@ public class TestXML {
             }
             
 		
-		if(validationOk) {
-			System.out.println("Validation OK");
-                    try {
-                        Scenario scCreated = (Scenario) ParserHandler.getInstanceFromXmlFile(xmlFile, Scenario.class);
-                    } catch (JAXBException ex) {
-                        System.out.println("Error: JAXB exception - " + ex.getMessage());
-                    }
-		}
-		else {
-			System.out.println("Validation error");
-		}
+            if(validationOk) {
+                    System.out.println("Validation OK");
+                try {
+                    Scenario scCreated = (Scenario) ParserHandler.getInstanceFromXmlFile(xmlFile, Scenario.class);
+                } catch (JAXBException ex) {
+                    System.out.println("Error: JAXB exception - " + ex.getMessage());
+                }
+            }
+            else {
+                    System.out.println("Validation error");
+            }
 		
 		
 	}
