@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://130.211.55.72:8080/Provider/Provider4?wsdl" uri="src/jbiasa/130.211.55.72_8080/Provider/Provider4.wsdl"/>
+    <system systemId="http://130.211.55.72:8080/Provider/Provider4?xsd=1" uri="src/jbiasa/130.211.55.72_8080/Provider/Provider4.xsd_1.xsd"/>
+    <nextCatalog catalog="nbproject/private/retriever/catalog.xml"/>
+</catalog>
