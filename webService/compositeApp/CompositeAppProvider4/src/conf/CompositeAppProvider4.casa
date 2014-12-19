@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="http://providers/" xmlns:ns2="CompositeAppProvider4" xmlns:xlink="http://www.w3.org/2000/xlink">
     <endpoints>
-        <endpoint name="endpoint1" endpoint-name="Provider4Port" interface-name="ns1:Provider4" service-name="ns1:Provider4"/>
-        <endpoint name="endpoint2" endpoint-name="casaProvider4" interface-name="ns1:Provider4" service-name="ns2:CompositeAppProvider4Service1"/>
+        <endpoint endpoint-name="Provider4Port" interface-name="ns1:Provider4" name="endpoint1" service-name="ns1:Provider4"/>
+        <endpoint endpoint-name="casaProvider4" interface-name="ns1:Provider4" name="endpoint2" service-name="ns2:CompositeAppProvider4Service1"/>
     </endpoints>
     <service-units>
         <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="CompositeAppProvider4-sun-http-binding" unit-name="sun-http-binding">
@@ -21,7 +21,7 @@
         </binding-component-service-unit>
     </service-units>
     <connections>
-        <connection state="new" consumer="endpoint2" provider="endpoint1"/>
+        <connection consumer="endpoint2" provider="endpoint1" state="new"/>
     </connections>
     <porttypes>
         <link xlink:href="../jbiasa/CompositeAppProvider4.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>

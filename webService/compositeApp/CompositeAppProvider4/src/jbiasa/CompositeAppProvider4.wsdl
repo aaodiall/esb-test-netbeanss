@@ -35,7 +35,7 @@
     </binding>
     <service name="CompositeAppProvider4Service1">
         <port name="casaProvider4" binding="tns:casaBinding1">
-            <soap:address location="http://localhost:${HttpDefaultPort}/CompositeAppProvider4Service1/casaProvider4"/>
+            <soap:address location="http://130.211.55.72:${HttpDefaultPort}/CompositeAppProvider4Service1/casaProvider4"/>
         </port>
     </service>
 </definitions>
