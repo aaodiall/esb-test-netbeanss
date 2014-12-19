@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
+  <services>
+    <service name="Provider1">
+      <implementation-class>providers.Provider1</implementation-class>
+    </service>
+    <service name="Provider2">
+      <implementation-class>providers.Provider2</implementation-class>
+    </service>
+    <service name="Provider3">
+      <implementation-class>providers.Provider3</implementation-class>
+    </service>
+    <service name="Provider4">
+      <implementation-class>providers.Provider4</implementation-class>
+    </service>
+    <service name="Provider5">
+      <implementation-class>providers.Provider5</implementation-class>
+    </service>
+  </services>
+  <clients/>
+  <jsr109>true</jsr109>
+</jax-ws>
