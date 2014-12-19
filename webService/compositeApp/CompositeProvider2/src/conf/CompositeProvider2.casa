@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="http://providers/" xmlns:ns2="CompositeProvider2" xmlns:xlink="http://www.w3.org/2000/xlink">
+    <endpoints>
+        <endpoint name="endpoint1" endpoint-name="Provider2Port" interface-name="ns1:Provider2" service-name="ns1:Provider2"/>
+        <endpoint name="endpoint2" endpoint-name="casaPort1" interface-name="ns1:Provider2" service-name="ns2:CompositeProvider2Service1"/>
+    </endpoints>
+    <service-units>
+        <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="CompositeProvider2-sun-http-binding" unit-name="sun-http-binding">
+            <ports>
+                <port bindingType="soap" x="67" y="37">
+                    <link xlink:href="../jbiasa/CompositeProvider2.wsdl#xpointer(/definitions/service[@name='CompositeProvider2Service1']/port[@name='casaPort1'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint2"/>
+                    <provides endpoint="endpoint2"/>
+                </port>
+                <port bindingType="soap" x="67" y="234">
+                    <link xlink:href="../jbiasa/23.251.142.243_8080/Provider/Provider2.wsdl#xpointer(/definitions/service[@name='Provider2']/port[@name='Provider2Port'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint1"/>
+                    <provides endpoint="endpoint1"/>
+                </port>
+            </ports>
+        </binding-component-service-unit>
+    </service-units>
+    <connections>
+        <connection state="new" consumer="endpoint2" provider="endpoint1"/>
+    </connections>
+    <porttypes>
+        <link xlink:href="../jbiasa/CompositeProvider2.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiasa/23.251.142.243_8080/Provider/Provider2.wsdl#xpointer(/definitions/portType[@name='Provider2'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/CompositeProvider2.wsdl#xpointer(/definitions/portType[@name='dummyCasaPortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/23.251.142.243_8080/Provider/Provider2.wsdl#xpointer(/definitions/portType[@name='Provider2'])" xlink:type="simple"/>
+    </porttypes>
+    <bindings>
+        <link xlink:href="../jbiasa/CompositeProvider2.wsdl#xpointer(/definitions/binding[@name='casaBinding1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiasa/23.251.142.243_8080/Provider/Provider2.wsdl#xpointer(/definitions/binding[@name='Provider2PortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/CompositeProvider2.wsdl#xpointer(/definitions/binding[@name='casaBinding1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/23.251.142.243_8080/Provider/Provider2.wsdl#xpointer(/definitions/binding[@name='Provider2PortBinding'])" xlink:type="simple"/>
+    </bindings>
+    <services>
+        <link xlink:href="../jbiasa/CompositeProvider2.wsdl#xpointer(/definitions/service[@name='CompositeProvider2Service1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiasa/23.251.142.243_8080/Provider/Provider2.wsdl#xpointer(/definitions/service[@name='Provider2'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/CompositeProvider2.wsdl#xpointer(/definitions/service[@name='CompositeProvider2Service1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/23.251.142.243_8080/Provider/Provider2.wsdl#xpointer(/definitions/service[@name='Provider2'])" xlink:type="simple"/>
+    </services>
+    <regions>
+        <region name="WSDL Endpoints" width="150"/>
+        <region name="JBI Modules" width="500"/>
+        <region name="External Modules" width="200"/>
+    </regions>
+</casa>
