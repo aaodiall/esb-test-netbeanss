@@ -12,6 +12,8 @@ import com.insa.tp3g1.esbsimulator.model.scenario.Provider;
 import com.insa.tp3g1.esbsimulator.model.scenario.Scenario;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -82,7 +84,12 @@ public class HMI {
             
         }
 
-        Scenario scenario = new Scenario(id, providers, nbConsumersProviders, name, consumers);
+        Scenario scenario = null;
+        try {
+            scenario = new Scenario(id, providers, nbConsumersProviders, name, consumers);
+        } catch (Exception ex) {
+            Logger.getLogger(HMI.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         return(scenario);
     }
