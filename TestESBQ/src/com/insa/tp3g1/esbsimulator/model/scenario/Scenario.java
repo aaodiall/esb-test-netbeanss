@@ -56,13 +56,25 @@ public class Scenario {
     
 
     public Scenario(int id, ArrayList<Provider> providers, int numberConsumerProvider,
-            String name, ArrayList<Consumer> consumers) {
+            String name, ArrayList<Consumer> consumers) throws Exception {
 		super();
 		this.id = id;
 		this.providers = providers;
 		this.numberConsumerProvider = numberConsumerProvider;
 		this.name = name;
 		this.consumers = consumers;
+                
+                if(consumers.size() != providers.size()) {
+                    throw new Exception("Number of consumers is different from number of providers");
+                }
+                
+                if(providers.size() != numberConsumerProvider) {
+                    throw new Exception("Number of consumers different from what is expected");
+                }
+                
+                if(providers.size() != numberConsumerProvider) {
+                    throw new Exception("Number of providers different from what is expected");
+                }
 	}
     
     public Scenario(){
