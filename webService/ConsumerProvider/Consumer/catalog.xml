@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://130.211.55.72:9080/CompositeProvider1Service1/casaPort1?wsdl" uri="src/conf/xml-resources/web-service-references/casaPort1/wsdl/130.211.55.72_9080/CompositeProvider1Service1/casaPort1.wsdl"/>
+    <system systemId="http://130.211.55.72:9080/CompositeProvider1-sun-http-binding/23.251.142.243_8080/Provider/Provider1.wsdl" uri="src/conf/xml-resources/web-service-references/casaPort1/wsdl/130.211.55.72_9080/CompositeProvider1-sun-http-binding/23.251.142.243_8080/Provider/Provider1.wsdl"/>
+    <system systemId="http://23.251.142.243:8080/Provider/Provider1?xsd=1" uri="src/conf/xml-resources/web-service-references/casaPort1/wsdl/23.251.142.243_8080/Provider/Provider1.xsd_1.xsd"/>
+    <system systemId="http://130.211.55.72:9080/CompositeProvider2Service1/casaPort1?wsdl" uri="src/conf/xml-resources/web-service-references/casaPort1_1/wsdl/130.211.55.72_9080/CompositeProvider2Service1/casaPort1.wsdl"/>
+    <system systemId="http://130.211.55.72:9080/CompositeProvider2-sun-http-binding/23.251.142.243_8080/Provider/Provider2.wsdl" uri="src/conf/xml-resources/web-service-references/casaPort1_1/wsdl/130.211.55.72_9080/CompositeProvider2-sun-http-binding/23.251.142.243_8080/Provider/Provider2.wsdl"/>
+    <system systemId="http://23.251.142.243:8080/Provider/Provider2?xsd=1" uri="src/conf/xml-resources/web-service-references/casaPort1_1/wsdl/23.251.142.243_8080/Provider/Provider2.xsd_1.xsd"/>
+    <system systemId="http://130.211.55.72:9080/CompositeProvider3Service1/casaPort1?wsdl" uri="src/conf/xml-resources/web-service-references/casaPort1_2/wsdl/130.211.55.72_9080/CompositeProvider3Service1/casaPort1.wsdl"/>
+    <system systemId="http://130.211.55.72:9080/CompositeProvider3-sun-http-binding/23.251.142.243_8080/Provider/Provider3.wsdl" uri="src/conf/xml-resources/web-service-references/casaPort1_2/wsdl/130.211.55.72_9080/CompositeProvider3-sun-http-binding/23.251.142.243_8080/Provider/Provider3.wsdl"/>
+    <system systemId="http://23.251.142.243:8080/Provider/Provider3?xsd=1" uri="src/conf/xml-resources/web-service-references/casaPort1_2/wsdl/23.251.142.243_8080/Provider/Provider3.xsd_1.xsd"/>
+    <system systemId="http://130.211.55.72:9080/CompositeProvider4Service1/casaPort1?wsdl" uri="src/conf/xml-resources/web-service-references/casaPort1_3/wsdl/130.211.55.72_9080/CompositeProvider4Service1/casaPort1.wsdl"/>
+    <system systemId="http://130.211.55.72:9080/CompositeProvider4-sun-http-binding/23.251.142.243_8080/Provider/Provider4.wsdl" uri="src/conf/xml-resources/web-service-references/casaPort1_3/wsdl/130.211.55.72_9080/CompositeProvider4-sun-http-binding/23.251.142.243_8080/Provider/Provider4.wsdl"/>
+    <system systemId="http://23.251.142.243:8080/Provider/Provider4?xsd=1" uri="src/conf/xml-resources/web-service-references/casaPort1_3/wsdl/23.251.142.243_8080/Provider/Provider4.xsd_1.xsd"/>
+    <system systemId="http://130.211.55.72:9080/CompositeProvider5Service1/casaPort1?wsdl" uri="src/conf/xml-resources/web-service-references/casaPort1_4/wsdl/130.211.55.72_9080/CompositeProvider5Service1/casaPort1.wsdl"/>
+    <system systemId="http://130.211.55.72:9080/CompositeProvider5-sun-http-binding/23.251.142.243_8080/Provider/Provider5.wsdl" uri="src/conf/xml-resources/web-service-references/casaPort1_4/wsdl/130.211.55.72_9080/CompositeProvider5-sun-http-binding/23.251.142.243_8080/Provider/Provider5.wsdl"/>
+    <system systemId="http://23.251.142.243:8080/Provider/Provider5?xsd=1" uri="src/conf/xml-resources/web-service-references/casaPort1_4/wsdl/23.251.142.243_8080/Provider/Provider5.xsd_1.xsd"/>
+</catalog>

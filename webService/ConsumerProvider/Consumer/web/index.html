@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Send config</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <FORM Method="POST" Action="sender">
+            <input type="radio" name="which" value="consumer">consumer<br>
+            <input type="radio" name="which" value="provider">provider<br>
+            ID : <select name="ids">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="2">3</option>
+                <option value="2">4</option>
+                <option value="2">5</option>
+            </select>
+            configuration : <INPUT type=text size=20 name="config"><BR>
+            <INPUT type="submit" value="Envoyer">
+
+        </FORM>
+    </body>
+</html>
