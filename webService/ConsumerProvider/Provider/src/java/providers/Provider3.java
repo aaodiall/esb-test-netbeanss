@@ -8,16 +8,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
-import javax.jws.WebParam;
 
 /**
  *
  * @author alpha
  */
 @WebService(serviceName = "Provider3")
-public class Provider3 {
+public class Provider3 extends ProviderBoss {
      private static final Integer ID=3;
-     private ProviderBean bean=new ProviderBean(ID, 1, 1);
+     private final ProviderBean bean=new ProviderBean(ID, 1, 1);
      
      /*creation du listenner
      / *Appelle config pour congigure le provider
@@ -40,18 +39,15 @@ public class Provider3 {
     }
 
     /**
-     * Web service operation
+     * To test the provider
+     *
+     * @return the configuration
      */
-    @WebMethod(operationName = "listenner")
-    public Boolean listenner(@WebParam(name = "dataExchange") Integer dataExchange, @WebParam(name = "processingTime") Integer processingTime) {
-       // TODO oussama met son code
-        
-        this.bean.setProcessingTime(processingTime);
-        this.bean.setSizeDataExchange(dataExchange);
-       
-        return true;
+    @WebMethod(operationName = "test")
+    public String test() throws Exception {
+        setBean(bean);
+        return getConfig(ID);
     }
-    
     
     
 }
