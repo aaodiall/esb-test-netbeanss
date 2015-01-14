@@ -56,4 +56,29 @@ public class Consumer {
 	public void setRequestBySeconde(int requestBySeconde) {
 		this.requestBySeconde = requestBySeconde;
 	}
+
+    @Override
+    public String toString() {
+        return "cons: "+id+" "+requestBySeconde+"\n";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Consumer other = (Consumer) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.requestBySeconde != other.requestBySeconde) {
+            return false;
+        }
+        return true;
+    }
+        
+        
 }

@@ -51,5 +51,31 @@ public class DataExchangeSize {
     {
         this.typeBehavior = type;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DataExchangeSize other = (DataExchangeSize) obj;
+        if (this.content != other.content) {
+            return false;
+        }
+        if ((this.typeBehavior == null) ? (other.typeBehavior != null) : !this.typeBehavior.equals(other.typeBehavior)) {
+            return false;
+        }
+        return true;
+    }
+        
+        
     
 }

@@ -76,6 +76,42 @@ public class Scenario {
                     throw new Exception("Number of providers different from what is expected");
                 }
 	}
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Scenario other = (Scenario) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.providers != other.providers && (this.providers == null || !this.providers.equals(other.providers))) {
+            return false;
+        }
+        if (this.consumers != other.consumers && (this.consumers == null || !this.consumers.equals(other.consumers))) {
+            return false;
+        }
+        if (this.numberConsumerProvider != other.numberConsumerProvider) {
+            return false;
+        }
+        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
     
     public Scenario(){
     	
@@ -132,5 +168,22 @@ public class Scenario {
         this.consumers = consumers;
     }
 
+    @Override
+    public String toString() {
+        String out =  id+" "+name+" "+numberConsumerProvider+" liste:";
+        
+        for(Provider p : providers) {
+            out += p.toString();
+        }
+        
+        out += " liste:";
+        for(Consumer c : consumers) {
+            out += c.toString();
+        }
+        
+        return out;
+    }
+
+    
     
 }

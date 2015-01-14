@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <scenario id="1">
-    <name>a</name>
-    <numberConsumerProvider>1</numberConsumerProvider>
+    <name>scenario</name>
+    <numberConsumerProvider>2</numberConsumerProvider>
     <consumers>
         <consumers>
             <id>1</id>
-            <requestBySeconde>1</requestBySeconde>
+            <requestBySeconde>13</requestBySeconde>
+        </consumers>
+        <consumers>
+            <id>2</id>
+            <requestBySeconde>0</requestBySeconde>
         </consumers>
     </consumers>
     <providers>
         <providers>
             <id>1</id>
-            <dataExchangeSize typeBehavior="ms">
-                <content>1</content>
+            <dataExchangeSize typeBehavior="byte">
+                <content>10</content>
             </dataExchangeSize>
             <processingTime timeUnit="ms">
-                <content>2</content>
+                <content>15</content>
             </processingTime>
         </providers>
     </providers>

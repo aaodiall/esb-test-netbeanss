@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<scenario id="17">
+    <name>test1</name>
+    <numberConsumerProvider>3</numberConsumerProvider>
+    <consumers>
+        <consumers>
+            <id>1</id>
+            <requestBySeconde>13</requestBySeconde>
+        </consumers>
+        <consumers>
+            <id>2</id>
+            <requestBySeconde>10</requestBySeconde>
+        </consumers>
+        <consumers>
+            <id>3</id>
+            <requestBySeconde>7</requestBySeconde>
+        </consumers>
+    </consumers>
+    <providers>
+        <providers>
+            <id>1</id>
+            <dataExchangeSize typeBehavior="byte">
+                <content>20</content>
+            </dataExchangeSize>
+            <processingTime timeUnit="ms">
+                <content>6</content>
+            </processingTime>
+        </providers>
+         <providers>
+            <id>2</id>
+            <dataExchangeSize typeBehavior="byte">
+                <content>21</content>
+            </dataExchangeSize>
+            <processingTime timeUnit="ms">
+                <content>9</content>
+            </processingTime>
+        </providers>
+         <providers>
+            <id>3</id>
+            <dataExchangeSize typeBehavior="byte">
+                <content>22</content>
+            </dataExchangeSize>
+            <processingTime timeUnit="ms">
+                <content>12</content>
+            </processingTime>
+        </providers>
+    </providers>
+</scenario>
