@@ -76,5 +76,34 @@ public class Provider {
 	public void setProcessingTime(ProcessingTime processingTime) {
 		this.processingTime = processingTime;
 	}
+        
+         @Override
+    public String toString() {
+        return "prov: "+id+" "+dataExchangeSize.getType()+" "+dataExchangeSize.getContent()
+                +" "+processingTime.getContent()+" "+processingTime.getTimeUnit()+"\n";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Provider other = (Provider) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.dataExchangeSize != other.dataExchangeSize && (this.dataExchangeSize == null || !this.dataExchangeSize.equals(other.dataExchangeSize))) {
+            return false;
+        }
+        if (this.processingTime != other.processingTime && (this.processingTime == null || !this.processingTime.equals(other.processingTime))) {
+            return false;
+        }
+        return true;
+    }
+         
+         
 
 }
