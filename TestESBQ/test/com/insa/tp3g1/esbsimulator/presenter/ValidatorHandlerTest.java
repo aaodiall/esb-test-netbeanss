@@ -42,13 +42,14 @@ public class ValidatorHandlerTest {
      */
     @Test
     public void testIsXmlValidAgainstXsd() throws Exception {
-        System.out.println("isXmlValidAgainstXsd");
-        File xmlFile = null;
-        File xsdFile = null;
-        boolean expResult = false;
+        System.out.println("Testing isXmlValidAgainstXsd()");
+
+        File xmlFile = new File("ScenarioTest.xml");
+        File xsdFile = new File("scenario.xsd");
+        
+        boolean expResult = true;
         boolean result = ValidatorHandler.isXmlValidAgainstXsd(xmlFile, xsdFile);
+        
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 }
