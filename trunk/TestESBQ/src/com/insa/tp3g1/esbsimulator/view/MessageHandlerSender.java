@@ -10,5 +10,6 @@ package com.insa.tp3g1.esbsimulator.view;
  * @author alpha
  */
 public interface MessageHandlerSender {
+     public String sendConfig(String who, String config) throws Exception;
     
 }
