@@ -87,7 +87,6 @@ public class ParserHandlerTest {
         
         // Scenario
         Scenario scenario = new Scenario(17, providers, coupleConsProv, "test1", consumers);
-        result = new Scenario(17, providers, coupleConsProv, "test1", consumers);
         
         /*********************************************************/
         

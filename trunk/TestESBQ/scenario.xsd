@@ -1,4 +1,4 @@
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="scenario">
     <xs:complexType>
       <xs:sequence>
@@ -21,7 +21,7 @@
         <xs:element name="providers">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="providers">
+              <xs:element name="providers" maxOccurs="unbounded" minOccurs="0">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element type="xs:byte" name="id"/>
@@ -30,7 +30,7 @@
                         <xs:sequence>
                           <xs:element type="xs:byte" name="content"/>
                         </xs:sequence>
-                        <xs:attribute type="xs:string" name="typeBehavior"/>
+                        <xs:attribute type="xs:string" name="typeBehavior" use="optional"/>
                       </xs:complexType>
                     </xs:element>
                     <xs:element name="processingTime">
@@ -38,7 +38,7 @@
                         <xs:sequence>
                           <xs:element type="xs:byte" name="content"/>
                         </xs:sequence>
-                        <xs:attribute type="xs:string" name="timeUnit"/>
+                        <xs:attribute type="xs:string" name="timeUnit" use="optional"/>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
