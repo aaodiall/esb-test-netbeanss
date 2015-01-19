@@ -4,6 +4,7 @@
  */
 package providers;
 
+import static java.lang.Thread.sleep;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebService;
@@ -31,12 +32,13 @@ public class Provider2 extends ProviderBoss {
     @WebMethod(operationName = "hello")
     public String hello() {
         String s = bean.fillString('X', bean.getSizeDataExchange()); 
+        Integer processTime = bean.getProcessingTime();
         try {
-            Thread.sleep(bean.getProcessingTime());
+          sleep(processTime);
         } catch (InterruptedException ex) {
-            Logger.getLogger(Provider2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Provider1.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "> "+ s +" <";
+        return processTime+";> "+ s +" <";
     }
 
     /**

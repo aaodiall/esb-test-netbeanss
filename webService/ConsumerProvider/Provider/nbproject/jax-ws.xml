@@ -16,6 +16,9 @@
     <service name="Provider5">
       <implementation-class>providers.Provider5</implementation-class>
     </service>
+    <service name="ProviderOld">
+      <implementation-class>providers.ProviderOld</implementation-class>
+    </service>
   </services>
   <clients/>
   <jsr109>true</jsr109>
