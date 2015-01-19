@@ -11,4 +11,5 @@ package com.insa.tp3g1.esbsimulator.view;
  */
 public interface MessageHandlerReceiver {
     
+    
 }

@@ -101,5 +101,90 @@
         <delete dir="${build.generated.dir}/jax-wsCache/Provider5"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/callConfigP5"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-Provider1, wsimport-client-Provider2, wsimport-client-Provider3, wsimport-client-Provider4, wsimport-client-Provider5"/>
+    <target name="wsimport-client-consumer1" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/consumer1"/>
+        <property name="wsdl-consumer1" location="xml-resources/web-service-references/consumer1/wsdl/23.251.142.243_8080/Consumer/consumer1.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/consumer1" destdir="${build.generated.dir}/jax-wsCache/consumer1" wsdl="${wsdl-consumer1}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://23.251.142.243:8080/Consumer/consumer1?wsdl" xnocompile="true" xendorsed="true" package="configC1">
+            <depends file="${wsdl-consumer1}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/consumer1"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/consumer1">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-consumer1" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/consumer1"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/configC1"/>
+    </target>
+    <target name="wsimport-client-consumer2" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/consumer2"/>
+        <property name="wsdl-consumer2" location="xml-resources/web-service-references/consumer2/wsdl/23.251.142.243_8080/Consumer/consumer2.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/consumer2" destdir="${build.generated.dir}/jax-wsCache/consumer2" wsdl="${wsdl-consumer2}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://23.251.142.243:8080/Consumer/consumer2?wsdl" xnocompile="true" xendorsed="true" package="callConfigC2">
+            <depends file="${wsdl-consumer2}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/consumer2"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/consumer2">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-consumer2" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/consumer2"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/callConfigC2"/>
+    </target>
+    <target name="wsimport-client-consumer3" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/consumer3"/>
+        <property name="wsdl-consumer3" location="xml-resources/web-service-references/consumer3/wsdl/23.251.142.243_8080/Consumer/consumer3.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/consumer3" destdir="${build.generated.dir}/jax-wsCache/consumer3" wsdl="${wsdl-consumer3}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://23.251.142.243:8080/Consumer/consumer3?wsdl" xnocompile="true" xendorsed="true" package="callConfigC3">
+            <depends file="${wsdl-consumer3}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/consumer3"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/consumer3">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-consumer3" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/consumer3"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/callConfigC3"/>
+    </target>
+    <target name="wsimport-client-consumer4" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/consumer4"/>
+        <property name="wsdl-consumer4" location="xml-resources/web-service-references/consumer4/wsdl/23.251.142.243_8080/Consumer/consumer4.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/consumer4" destdir="${build.generated.dir}/jax-wsCache/consumer4" wsdl="${wsdl-consumer4}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://23.251.142.243:8080/Consumer/consumer4?wsdl" xnocompile="true" xendorsed="true" package="callConfigC4">
+            <depends file="${wsdl-consumer4}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/consumer4"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/consumer4">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-consumer4" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/consumer4"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/callConfigC4"/>
+    </target>
+    <target name="wsimport-client-consumer5" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/consumer5"/>
+        <property name="wsdl-consumer5" location="xml-resources/web-service-references/consumer5/wsdl/23.251.142.243_8080/Consumer/consumer5.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/consumer5" destdir="${build.generated.dir}/jax-wsCache/consumer5" wsdl="${wsdl-consumer5}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://23.251.142.243:8080/Consumer/consumer5?wsdl" xnocompile="true" xendorsed="true" package="callConfigC5">
+            <depends file="${wsdl-consumer5}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/consumer5"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/consumer5">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-consumer5" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/consumer5"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/callConfigC5"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-Provider1, wsimport-client-Provider2, wsimport-client-Provider3, wsimport-client-Provider4, wsimport-client-Provider5, wsimport-client-consumer1, wsimport-client-consumer2, wsimport-client-consumer3, wsimport-client-consumer4, wsimport-client-consumer5"/>
 </project>
