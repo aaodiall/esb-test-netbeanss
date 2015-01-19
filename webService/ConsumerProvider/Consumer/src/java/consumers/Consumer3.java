@@ -36,6 +36,8 @@ public class Consumer3 extends ConsumerBoss {
     @WebMethod(operationName = "test")
     public String test() throws Exception {
         setBean(bean);
-        return getConfig(ID);
+        getConfig(ID);
+        Thread.sleep(100);
+        return invokeProvider();
     }
 }

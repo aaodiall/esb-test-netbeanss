@@ -1,9 +1,11 @@
 package consumers;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -11,6 +13,7 @@ import java.io.IOException;
  */
 public class Invoker1 extends Thread {
 
+    private static final String LOG_NAME = "logs";
     static Thread runna;
 
     public static void main(String[] args) {
@@ -26,25 +29,19 @@ public class Invoker1 extends Thread {
 
     @Override
     public void run() {
-        File log = new File("C:\\Users\\samsung\\Desktop\\log.txt");
-
         try {
-            if (!log.exists()) {
-                System.out.println("We had to make a new file.");
-                log.createNewFile();
-            }
+            emitLog("1;sent;" + Thread.currentThread().getId() + ";" + System.nanoTime());
             String res = hello();
-            FileWriter fileWriter = new FileWriter(log, true);
-
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write("invocation " + Thread.currentThread().getId() + " : " + hello());
-            bufferedWriter.newLine();
-            bufferedWriter.close();
-
-            System.out.println("Done");
+            //System.out.println(res);
+            emitLog("1;recieved;"+ res + ";" + Thread.currentThread().getId() + ";" + System.nanoTime());
+            
         } catch (IOException e) {
-            System.out.println("COULD NOT LOG!!");
-        }
+            try {
+                emitLog("1;lost;" + Thread.currentThread().getId() + ";" + System.nanoTime());
+            } catch (IOException ex) {
+                Logger.getLogger(Invoker1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }    
     }
 
     private static String hello() {
@@ -53,5 +50,27 @@ public class Invoker1 extends Thread {
         return port.hello();
     }
     
+    public void emitLog(String msg) throws IOException
+                 {
+
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("146.148.27.98");
+        factory.setUsername("admin");
+        factory.setPassword("adminadmin");
+        factory.setPort(5672);
+        
+        Connection connection = factory.newConnection();
+        Channel channel = connection.createChannel();
+
+        channel.exchangeDeclare(LOG_NAME, "fanout");
+
+        String message = msg;
+
+        channel.basicPublish(LOG_NAME, "", null, message.getBytes());
+        //System.out.println(" [x] Sent '" + message + "'");
+
+        channel.close();
+        connection.close();
+    }
     
 }
