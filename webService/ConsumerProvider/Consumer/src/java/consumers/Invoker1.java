@@ -30,7 +30,7 @@ public class Invoker1 extends Thread {
     @Override
     public void run() {
         try {
-            emitLog("1;sent;" + Thread.currentThread().getId() + ";" + System.nanoTime());
+            emitLog("1;sent;-1;x;" + Thread.currentThread().getId() + ";" + System.nanoTime());
             String res = hello();
             //System.out.println(res);
             emitLog("1;recieved;"+ res + ";" + Thread.currentThread().getId() + ";" + System.nanoTime());

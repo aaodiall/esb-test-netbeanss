@@ -19,7 +19,7 @@ public class Invoker4 extends Thread {
     @Override
     public void run() {
         try {
-            emitLog("4;sent;" + Thread.currentThread().getId() + ";" + System.nanoTime());
+            emitLog("4;sent;-1;x;" + Thread.currentThread().getId() + ";" + System.nanoTime());
             String res = hello();
             emitLog("4;recieved;"+ res + ";" + Thread.currentThread().getId() + ";" + System.nanoTime());
         } catch (IOException e) {
