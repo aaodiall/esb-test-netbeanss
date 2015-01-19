@@ -15,9 +15,11 @@ import com.insa.tp3g1.esbsimulator.presenter.ParserHandler;
 import com.insa.tp3g1.esbsimulator.presenter.ValidatorHandler;
 import com.insa.tp3g1.esbsimulator.test.TestXML;
 import com.insa.tp3g1.esbsimulator.view.MessageHandler;
+import static com.insa.tp3g1.esbsimulator.view.MessageHandler.sendConfig1;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,7 +59,19 @@ public class ESBSimulator {
         try {
             scenario = new Scenario(1, providers, 2, "scenario", consumers);
             MessageHandler.providerHandler(scenario);
-           // MessageHandler.consumerHandler(scenario);
+            new Thread(){
+                @Override
+                public void run(){
+                    try {
+                        MessageHandler.logGetter();
+                    } catch (Exception ex) {
+                        Logger.getLogger(ESBSimulator.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
+            }.start();
+            sleep(100);
+            MessageHandler.consumerHandler(scenario);
         } catch (Exception ex) {
             Logger.getLogger(ESBSimulator.class.getName()).log(Level.SEVERE, null, ex);
         }
