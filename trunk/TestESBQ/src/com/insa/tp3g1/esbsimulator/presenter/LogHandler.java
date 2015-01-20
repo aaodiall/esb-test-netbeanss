@@ -12,7 +12,7 @@ import java.util.Map.Entry;
 
 /**
  *
- * @author Oussama
+ * @author Oussama, belliot
  */
 public class LogHandler {
 
@@ -61,37 +61,85 @@ public class LogHandler {
     
     public Result fillInResultForm() {
         long maxRespTime = 0;
-        int minRespTime = Integer.MAX_VALUE;
-        int[] avRespTime = new int[theLog.size()];
+        long minRespTime = Integer.MAX_VALUE;
+        long[] avRespTime = new long[theLog.size()];
         int lostReq = 0;
         
-        long maxTemp;
+        long timeTemp;
+        long averageTemp;
         
-//        ResponseTime responseTime = new ResponseTime("sec", "10", "6");
-//        TotalResult totalResult = new TotalResult("8", "10", responseTime);
-//
-//        LinkConsumerProvider lcp1 = new LinkConsumerProvider("10", "1", "2");
-//        LinkConsumerProvider lcp2 = new LinkConsumerProvider("20", "3", "4");
-//        LinkConsumerProvider linkConsProv[] = {lcp1, lcp2};
-//
-//        Result result = new Result(totalResult, linkConsProv);
+        int counter = 0;
+        
+        ArrayList<LinkConsumerProvider> listConsProv = new ArrayList<LinkConsumerProvider>();
+        LinkConsumerProvider lcp = null;
 
+        /***** Calcul of the result variables *****/
         
         // Access to link Cons Prov
         for (Entry<String, HashMap<String, logHelper>> subLog : theLog.entrySet()) {
             // Access to thread
+            averageTemp = 0;
             for (Entry<String, logHelper> smallLog : subLog.getValue().entrySet()) {
+                // Test if the request is lost
                 if (smallLog.getValue().getProcessingTime() != -1) {
-                    maxTemp = smallLog.getValue().getRecievedTime()
+                    timeTemp = smallLog.getValue().getRecievedTime()
                              - smallLog.getValue().getSentTime()
                              - smallLog.getValue().getProcessingTime();
-                     if (maxTemp > maxRespTime)
-                         maxTemp = maxRespTime;
+                   
+                    // If it is the maximum time
+                    if (timeTemp > maxRespTime){
+                        timeTemp = maxRespTime;
+                    }
+                    // If it is the minimum time
+                    if (timeTemp < minRespTime){
+                        timeTemp = minRespTime;
+                    }
+                    
+                    averageTemp += timeTemp;
+                     
                 }
+                else {
+                    // The request is lost
+                    lostReq++;
+                }
+                
             }
+            
+            // Calcul of the average time for on link Cons Prov
+            averageTemp = averageTemp / subLog.getValue().size();
+            avRespTime[counter] = averageTemp;
+            
+            // Add the current link Cons Prov to the ArrayList
+            lcp = new LinkConsumerProvider(String.valueOf(averageTemp),
+                    String.valueOf(counter + 1), String.valueOf(counter + 1));
+            listConsProv.add(lcp);
+            
+            // Use to fill the average-response-time table
+            counter++;
         }
         
-        return null;
+        // Calcul of the global average response time
+        averageTemp = 0;
+        for (int i = 0; i < avRespTime.length; i++){
+            averageTemp += avRespTime[i];
+        }
+        averageTemp = averageTemp / (long) avRespTime.length;
+        
+        /******************************************/
+        
+        
+        /***** Creation of the Result instance *****/
+        
+        // /!\ Not sure for the "sec" parameter
+        ResponseTime responseTime = new ResponseTime("sec", String.valueOf(maxRespTime), String.valueOf(minRespTime));
+        TotalResult totalResult = new TotalResult(String.valueOf(averageTemp), String.valueOf(lostReq), responseTime);
+
+        Result result = new Result(totalResult,
+                listConsProv.toArray(new LinkConsumerProvider[listConsProv.size()]));
+        
+        /*******************************************/
+        
+        return result;
     
     }
 
