@@ -1,9 +1,14 @@
 package com.insa.tp3g1.esbsimulator.presenter;
 
+import com.insa.tp3g1.esbsimulator.model.result.LinkConsumerProvider;
+import com.insa.tp3g1.esbsimulator.model.result.ResponseTime;
+import com.insa.tp3g1.esbsimulator.model.result.Result;
+import com.insa.tp3g1.esbsimulator.model.result.TotalResult;
 import com.insa.tp3g1.esbsimulator.model.result.logHelper;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  *
@@ -52,6 +57,42 @@ public class LogHandler {
             littleHelper.setProcessingTime(Integer.parseInt(data[2]));
             littleHelper.setRecievedTime(Long.parseLong(data[5]));
         }
+    }
+    
+    public Result fillInResultForm() {
+        long maxRespTime = 0;
+        int minRespTime = Integer.MAX_VALUE;
+        int[] avRespTime = new int[theLog.size()];
+        int lostReq = 0;
+        
+        long maxTemp;
+        
+//        ResponseTime responseTime = new ResponseTime("sec", "10", "6");
+//        TotalResult totalResult = new TotalResult("8", "10", responseTime);
+//
+//        LinkConsumerProvider lcp1 = new LinkConsumerProvider("10", "1", "2");
+//        LinkConsumerProvider lcp2 = new LinkConsumerProvider("20", "3", "4");
+//        LinkConsumerProvider linkConsProv[] = {lcp1, lcp2};
+//
+//        Result result = new Result(totalResult, linkConsProv);
+
+        
+        // Access to link Cons Prov
+        for (Entry<String, HashMap<String, logHelper>> subLog : theLog.entrySet()) {
+            // Access to thread
+            for (Entry<String, logHelper> smallLog : subLog.getValue().entrySet()) {
+                if (smallLog.getValue().getProcessingTime() != -1) {
+                    maxTemp = smallLog.getValue().getRecievedTime()
+                             - smallLog.getValue().getSentTime()
+                             - smallLog.getValue().getProcessingTime();
+                     if (maxTemp > maxRespTime)
+                         maxTemp = maxRespTime;
+                }
+            }
+        }
+        
+        return null;
+    
     }
 
     @Override
