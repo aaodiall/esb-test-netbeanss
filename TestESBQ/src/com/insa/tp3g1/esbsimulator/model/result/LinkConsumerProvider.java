@@ -37,7 +37,9 @@ public class LinkConsumerProvider {
         this.setProviderId(providerId);
     }
 
-    
+    public LinkConsumerProvider(){
+        
+    }
     
     /**
      * Getters and setters

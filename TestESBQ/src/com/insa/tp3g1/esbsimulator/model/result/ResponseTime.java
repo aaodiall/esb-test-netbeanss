@@ -34,6 +34,10 @@ public class ResponseTime {
         this.setMaxResponseTime(maxResponseTime);
         this.setMinResponseTime(minResponseTime);
     }
+    
+    public ResponseTime(){
+        
+    }
 
     /**
      * Getters and setters
