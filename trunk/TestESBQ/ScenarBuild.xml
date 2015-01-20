@@ -22,5 +22,14 @@
                 <content>15</content>
             </processingTime>
         </providers>
+        <providers>
+            <id>2</id>
+            <dataExchangeSize typeBehavior="byte">
+                <content>10</content>
+            </dataExchangeSize>
+            <processingTime timeUnit="ms">
+                <content>15</content>
+            </processingTime>
+        </providers>
     </providers>
 </scenario>

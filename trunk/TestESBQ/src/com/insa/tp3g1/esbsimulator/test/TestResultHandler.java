@@ -10,6 +10,7 @@ import com.insa.tp3g1.esbsimulator.model.result.ResponseTime;
 import com.insa.tp3g1.esbsimulator.model.result.Result;
 import com.insa.tp3g1.esbsimulator.model.result.TotalResult;
 import com.insa.tp3g1.esbsimulator.presenter.ResultHandler;
+import com.insa.tp3g1.esbsimulator.presenter.ResultHandler;
 
 /**
  *

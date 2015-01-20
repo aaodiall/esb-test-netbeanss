@@ -37,6 +37,10 @@ public class TotalResult {
         this.setResponseTime(responseTime);
     }
     
+    public TotalResult(){
+        
+    }
+    
     /**
      * Getters and setters
      * @return 
