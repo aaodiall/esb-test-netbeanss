@@ -38,22 +38,22 @@ public class HMI {
     public Scenario createScenario() {
         
         
-        System.out.println("entrer l'id du scenario : \n");
+        System.out.println("Id of the scenario : \n");
         int id = this.scanner.nextInt();
         
-         System.out.println("entrer le nom du scenario : \n");
+         System.out.println("Name of the scenario : \n");
          String sleep = this.scanner.nextLine();
          String name = this.scanner.nextLine();
 
-        System.out.println("entrer le nombre de consumers & providers: \n");
+        System.out.println("Number of consumers & providers: \n");
         int nbConsumersProviders = this.scanner.nextInt();
         
         ArrayList<Consumer> consumers = new ArrayList<Consumer>();
         int i;
         for (i=0; i<nbConsumersProviders; i++) {
-            System.out.println("entrer l'id du consumer : \n");
+            System.out.println("Id of the consumer : \n");
             int idc = this.scanner.nextInt();
-            System.out.println("entrer le nombre de requetes par seconde : \n");
+            System.out.println("Number of requests/second : \n");
             int nbRequest = this.scanner.nextInt();
             
             consumers.add(new Consumer(idc, nbRequest));
@@ -63,19 +63,19 @@ public class HMI {
         ArrayList<Provider> providers = new ArrayList<Provider>();
         int j;
         for (j=0; j<nbConsumersProviders; j++) {
-            System.out.println("entrer l'id du provider : \n");
+            System.out.println("Id of the provider : \n");
             int idp = this.scanner.nextInt();
             
-            System.out.println("entrer la valeur du processing time : \n");
+            System.out.println("Value of the processing time : \n");
             int valeurProcessingTime = this.scanner.nextInt();
-            System.out.println("entrer l'unité du processing time : \n");
+            System.out.println("Unity of the processing time : \n");
             sleep = this.scanner.nextLine();
             String uniteProcessingTime = this.scanner.nextLine();
             ProcessingTime p = new ProcessingTime(valeurProcessingTime, uniteProcessingTime);
 
-            System.out.println("entrer la valeur des données échangées : \n");
+            System.out.println("Value of the data exchanged : \n");
             int valeurDataExchangeSize = this.scanner.nextInt();
-            System.out.println("entrer l'unité des données échangées : \n");
+            System.out.println("Unity of the data excanged : \n");
             sleep = this.scanner.nextLine();
             String uniteDataExchangeSize = this.scanner.nextLine();
             DataExchangeSize data = new DataExchangeSize(valeurDataExchangeSize, uniteDataExchangeSize);
