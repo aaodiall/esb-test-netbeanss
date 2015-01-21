@@ -60,15 +60,43 @@ public class LogHandlerTest {
     /**
      * Test of add method, of class LogHandler.
      */
-//    @Test
-//    public void testAdd() {
-//        System.out.println("Testing add");
-//        String log = "";
-//        LogHandler instance = new LogHandler();
-//        instance.add(log);
-//        // TODO review the generated test code and remove the default call to fail.
-//        //fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testAdd() {
+        System.out.println("Testing add");
+        
+        /********* Create the expected result *********/
+        /*** Hashmap creation ***/
+        
+        // Create and fill in the log hashmap 2 for link 1
+        HashMap<String, HashMap<String, logHelper>> expLog = new HashMap<String, HashMap<String, logHelper>>();
+        HashMap<String, logHelper> lineOfLog = new HashMap<String, logHelper>();
+        logHelper littleHelper = new logHelper();
+        littleHelper.setProcessingTime(2);
+        littleHelper.setSentTime(20*1000000);
+        littleHelper.setRecievedTime(23*1000000);
+        lineOfLog.put("1", littleHelper);
+        expLog.put("1", lineOfLog);
+        
+        /***************************************/
+        
+        String log = "1;sent;-1;Hello;1;20000000";
+        LogHandler instance = new LogHandler();
+        instance.add(log);
+        log = "1;recieved;2;Bye;1;23000000";
+        instance.add(log);
+        HashMap<String, HashMap<String, logHelper>> createdLog = instance.getTheLog();
+       
+        System.out.println("++++++++++++++++++++++ expected hashmap");
+        System.out.println(expLog.toString());
+        System.out.println("++++++++++++++++++++++ created hashmap");
+        System.out.println(createdLog.toString());
+        System.out.println("++++++++++++++++++++++");
+        
+        //assertEquals(true,createdLog.equals(expLog));
+        
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
 
     /**
      * Test of fillInResultForm method, of class LogHandler.
@@ -83,52 +111,40 @@ public class LogHandlerTest {
         // Create and fill in the main hashmap 
         HashMap<String, HashMap<String, logHelper>> theLog = new HashMap<String, HashMap<String, logHelper>>();
         
-        HashMap<String, logHelper> lineOfLog;
-        logHelper littleHelper;
         
-        // Create and fill in the log hashmap 1 for link 1: fail
-//        lineOfLog = new HashMap<String, logHelper>();
-//        lineOfLog.put("1", new logHelper(-1));
-//        theLog.put("1", lineOfLog);
-        
-        // Create and fill in the log hashmap 2 for link 1
-        lineOfLog =  new HashMap<String, logHelper>();
-        
-        theLog.put("1", new HashMap<String, logHelper>());
-        lineOfLog = theLog.get("1");       
-        
-        lineOfLog.put("1", new logHelper());
-        littleHelper = lineOfLog.get("1");
-        
-//        littleHelper = new logHelper(2);
-        
-        littleHelper.setProcessingTime(1);
-        littleHelper.setSentTime(20*1000000);
-        littleHelper.setRecievedTime(23*1000000);
-//        lineOfLog.put("2", littleHelper);
+        // Create and fill in the log hashmap 1 for link 2
+        HashMap<String, logHelper> lineOfLog2 =  new HashMap<String, logHelper>();
+        logHelper littleHelper21 = new logHelper(1);
+        littleHelper21.setSentTime(10);
+        littleHelper21.setRecievedTime(12);
+        lineOfLog2.put("1", littleHelper21);
 
-//        
-//        // Create and fill in the log hashmap 1 for link 2
-//        lineOfLog =  new HashMap<String, logHelper>();
-//        littleHelper = new logHelper(1);
-//        littleHelper.setSentTime(10);
-//        littleHelper.setRecievedTime(12);
-//        lineOfLog.put("1", littleHelper);
-//        theLog.put("2", lineOfLog);
-//
         // Create and fill in the log hashmap 2 for link 2: fail
-//        lineOfLog =  new HashMap<String, logHelper>();
-//        lineOfLog.put("1", new logHelper(-1));
-//        theLog.put("2", lineOfLog);
+        lineOfLog2 =  new HashMap<String, logHelper>();
+        lineOfLog2.put("2", new logHelper(-1));
         
         // Create and fill in the log hashmap 3 for link 2
-        lineOfLog =  new HashMap<String, logHelper>();
-        littleHelper = new logHelper();
-        littleHelper.setProcessingTime(3);
-        littleHelper.setSentTime(30*1000000);
-        littleHelper.setRecievedTime(34*1000000);
-        lineOfLog.put("34", littleHelper);
-        theLog.put("2", lineOfLog);
+        logHelper littleHelper22 = new logHelper();
+        littleHelper22.setProcessingTime(3);
+        littleHelper22.setSentTime(30*1000000);
+        littleHelper22.setRecievedTime(34*1000000);
+        lineOfLog2.put("3", littleHelper22);
+        theLog.put("2", lineOfLog2);
+             
+        
+        // Create and fill in the log hashmap 1 for link 1: fail
+        HashMap<String, logHelper> lineOfLog1 = new HashMap<String, logHelper>();
+        lineOfLog1.put("1", new logHelper(-1));
+//        theLog.put("1", lineOfLog1);
+        
+        // Create and fill in the log hashmap 2 for link 1
+        logHelper littleHelper11 = new logHelper();
+        littleHelper11.setProcessingTime(2);
+        littleHelper11.setSentTime(20*1000000);
+        littleHelper11.setRecievedTime(23*1000000);
+        lineOfLog1.put("2", littleHelper11);
+        theLog.put("1", lineOfLog1);
+
         
         /*** Creation of the expected scenario ***/
         ResponseTime responseTime = new ResponseTime("s", "1", "1");
@@ -136,7 +152,7 @@ public class LogHandlerTest {
 
         LinkConsumerProvider lcp1 = new LinkConsumerProvider("1", "1", "1");
         LinkConsumerProvider lcp2 = new LinkConsumerProvider("1", "2", "2");
-        LinkConsumerProvider linkConsProv[] = {lcp1, lcp2};
+        LinkConsumerProvider linkConsProv[] = {lcp2, lcp1};
 
         Result expResult = new Result(totalResult, linkConsProv);
         
@@ -152,7 +168,7 @@ public class LogHandlerTest {
         System.out.println("++++++++++++++++++++++ created");
         System.out.println(result.toString());
         System.out.println("++++++++++++++++++++++ hashmap");
-        System.out.println(theLog.toString());
+//        System.out.println(theLog.toString());
         System.out.println("++++++++++++++++++++++");
         
         assertEquals(expResult, result);

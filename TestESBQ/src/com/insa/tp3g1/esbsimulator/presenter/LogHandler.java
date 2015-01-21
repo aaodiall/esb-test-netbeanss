@@ -112,25 +112,29 @@ public class LogHandler {
                     // The request is lost
                     totalLostReq++;
                     lostReqLink++;
+//                    System.out.println("Lost req " + totalLostReq);
                 }
                 
             }
             
             // Calcul of the average time for on link Cons Prov
-            if (averageTemp == 0){
+            if (subLog.getValue().size() - lostReqLink > 0){
+//                System.out.println(subLog.getValue().size());
                 averageTemp = averageTemp / (subLog.getValue().size() - lostReqLink);
             }
-            avRespTime[counter] = averageTemp;
+            counter = Integer.parseInt(subLog.getKey());
+//            System.out.println("Hey hey !" + counter);
+            avRespTime[counter-1] = averageTemp;
             
             // Add the current link Cons Prov to the ArrayList
             lcp = new LinkConsumerProvider(String.valueOf((averageTemp/PARAM)),
-                    String.valueOf(counter + 1), String.valueOf(counter + 1));
+                    String.valueOf(counter), String.valueOf(counter));
             listConsProv.add(lcp);
             
             // Use to fill the average-response-time table
-            counter++;
+//            counter++;
         }
-        
+
         // Calcul of the global average response time
         averageTemp = 0;
         for (int i = 0; i < avRespTime.length; i++){
