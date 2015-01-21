@@ -8,6 +8,7 @@ package com.insa.tp3g1.esbsimulator.model.result;
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.PrintStream;
+import java.util.Arrays;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -114,5 +115,35 @@ public class Result {
         printStream.close();
         System.setOut(console);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Result other = (Result) obj;
+        if (this.totalResult != other.totalResult && (this.totalResult == null || !this.totalResult.equals(other.totalResult))) {
+            return false;
+        }
+        if (!Arrays.deepEquals(this.linksConsumerProvider, other.linksConsumerProvider)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        String result = "Result{" + "totalResult=" + totalResult + ", linksConsumerProvider=";
+        for (int i = 0; i < linksConsumerProvider.length; i++){
+            result += linksConsumerProvider[i].toString();
+        }
+        result += '}';
+        return result;
+    }
+    
+    
     
 }

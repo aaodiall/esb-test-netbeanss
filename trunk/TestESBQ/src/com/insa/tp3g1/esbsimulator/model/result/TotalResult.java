@@ -75,4 +75,34 @@ public class TotalResult {
     {
         this.responseTime = responseTime;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TotalResult other = (TotalResult) obj;
+        if ((this.averageResponseTime == null) ? (other.averageResponseTime != null) : !this.averageResponseTime.equals(other.averageResponseTime)) {
+            return false;
+        }
+        if ((this.lostRequests == null) ? (other.lostRequests != null) : !this.lostRequests.equals(other.lostRequests)) {
+            return false;
+        }
+        if (this.responseTime != other.responseTime && (this.responseTime == null || !this.responseTime.equals(other.responseTime))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "TotalResult{" + "averageResponseTime=" + averageResponseTime + ", lostRequests=" + lostRequests + ", responseTime=" + responseTime + '}';
+    }
+    
+    
+    
 }

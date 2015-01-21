@@ -74,4 +74,36 @@ public class ResponseTime {
     {
         this.minResponseTime = minResponseTime;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ResponseTime other = (ResponseTime) obj;
+        if ((this.timeUnit == null) ? (other.timeUnit != null) : !this.timeUnit.equals(other.timeUnit)) {
+            return false;
+        }
+        if ((this.maxResponseTime == null) ? (other.maxResponseTime != null) : !this.maxResponseTime.equals(other.maxResponseTime)) {
+            return false;
+        }
+        if ((this.minResponseTime == null) ? (other.minResponseTime != null) : !this.minResponseTime.equals(other.minResponseTime)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+
+    @Override
+    public String toString() {
+        return "ResponseTime{" + "timeUnit=" + timeUnit + ", maxResponseTime=" + maxResponseTime + ", minResponseTime=" + minResponseTime + '}';
+    }
+    
+    
+    
 }
