@@ -1,13 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.insa.tp3g1.esbsimulator.view;
 
 import callConfig.Exception_Exception;
+import com.insa.tp3g1.esbsimulator.model.result.Result;
 import com.insa.tp3g1.esbsimulator.model.scenario.Scenario;
 import com.insa.tp3g1.esbsimulator.presenter.LogHandler;
+import com.insa.tp3g1.esbsimulator.presenter.ResultHandler;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -16,18 +18,19 @@ import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.ShutdownSignalException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jfree.ui.RefineryUtilities;
 
 /**
  *
  * @author alpha
  */
 public class MessageHandler extends Thread implements MessageHandlerReceiver, MessageHandlerSender {
-
+    
     private static final String EXCHANGE_NAME = "configuration";
     private static final String EXCHANGE_NAME_START = "start";
     private static final String LOG_NAME = "logs";
     private static Integer count = 0;
-
+    
 //    public static void main(String[] args) {
 //        try {
 //            logGetter();
@@ -45,18 +48,23 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
             Logger.getLogger(MessageHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public static void providerHandler(final Scenario scenario) {
-
+        
         //do wait the prodider
         for (int i = 0; i < scenario.getNumberConsumerProvider(); i++) {
             new Thread("" + (i + 1)) {
                 @Override
                 public void run() {
                     try {
-
+                        
                         String message = callConfigProvider(Integer.parseInt(getName()));
-
+                        try {
+                            sleep(10);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(MessageHandler.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
                     } catch (Exception_Exception ex) {
                         Logger.getLogger(MessageHandler.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (callConfigP2.Exception_Exception ex) {
@@ -68,10 +76,10 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
                     } catch (callConfigP5.Exception_Exception ex) {
                         Logger.getLogger(MessageHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
+                    
                 }
             }.start();
-
+            
         }
         //send config to the provider
         for (int i = 0; i < scenario.getNumberConsumerProvider(); i++) {
@@ -87,7 +95,7 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
                             + scenario.getProviders().get(Integer.parseInt(getName()) - 1).getProcessingTime().getContent();
                     System.out.println("config: " + config);
                     try {
-
+                        
                         System.out.println(sendConfig1("provider" + getName(), config));
                     } catch (Exception ex) {
                         Logger.getLogger(MessageHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,10 +103,12 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
                 }
             }.start();
         }
+        
+        System.out.println("-------------------------------fin Provider handler---------------------------------------");
     }
-
+    
     public static void consumerHandler(final Scenario scenario) {
-
+        
         //do wait the prodider
         for (int i = 0; i < scenario.getNumberConsumerProvider(); i++) {
             new Thread("" + (i + 1)) {
@@ -106,6 +116,11 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
                 public void run() {
                     try {
                         String message = callConfigConsumer(Integer.parseInt(getName()));
+                        try {
+                            sleep(10);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(MessageHandler.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     } catch (configC1.Exception_Exception ex) {
                         Logger.getLogger(MessageHandler.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (callConfigC2.Exception_Exception ex) {
@@ -117,12 +132,13 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
                     } catch (callConfigC5.Exception_Exception ex) {
                         Logger.getLogger(MessageHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
+                    
                 }
             }.start();
-
+            
         }
         //send config to the provider
+        
         for (int i = 0; i < scenario.getNumberConsumerProvider(); i++) {
             new Thread("" + (i + 1)) {
                 @Override
@@ -140,12 +156,13 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
                     }
                     System.out.println("fin thread " + getName());
                 }
-
+                
             }.start();
         }
-
+        
+        System.out.println("++++++++++++++++++++++++fin Consumer handler+++++++++++++++++++++++++++++++++");
     }
-
+    
     private static String callConfigProvider(int id) throws Exception_Exception, callConfigP2.Exception_Exception, callConfigP3.Exception_Exception, callConfigP4.Exception_Exception, callConfigP5.Exception_Exception {
         String message = "";
         switch (id) {
@@ -165,11 +182,11 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
                 message = callP5();
                 break;
         }
-
+        
         return message;
-
+        
     }
-
+    
     private static String callConfigConsumer(int id) throws configC1.Exception_Exception, callConfigC2.Exception_Exception, callConfigC3.Exception_Exception, callConfigC4.Exception_Exception, callConfigC5.Exception_Exception {
         String message = "";
         switch (id) {
@@ -189,15 +206,15 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
                 message = callC5();
                 break;
         }
-
+        
         return message;
     }
-
+    
     public static String sendConfig1(String who, String config) throws Exception {
-
+        
         /* calling connectionFactory to create a custome connexion with
-         * rabbitMQ server information.
-         */
+        * rabbitMQ server information.
+        */
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("146.148.27.98");
         factory.setUsername("admin");
@@ -217,7 +234,7 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
         // the message and the distination
         String forWho = who;
         String message = config;
-
+        
         // publish the message
         channel.basicPublish(EXCHANGE_NAME, forWho, null, message.getBytes());
         //  System.out.println("basicPublish");
@@ -226,116 +243,116 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
         connection.close();
         return " [x] Sent '" + forWho + "':'" + message + "'";
     }
-
+    
     /*  @Override
-     public void start(String message)  throws Exception{
+    public void start(String message)  throws Exception{
     
-     ConnectionFactory factory = new ConnectionFactory();
-     factory.setHost("146.148.27.98");
-     factory.setUsername("admin");
-     factory.setPassword("adminadmin");
-     factory.setPort(5672);
+    ConnectionFactory factory = new ConnectionFactory();
+    factory.setHost("146.148.27.98");
+    factory.setUsername("admin");
+    factory.setPassword("adminadmin");
+    factory.setPort(5672);
     
-     // establish the connection with RabbitMQ server using our factory.
-     Connection connection = factory.newConnection();
+    // establish the connection with RabbitMQ server using our factory.
+    Connection connection = factory.newConnection();
     
     
-     Channel channel = connection.createChannel();
-     channel.exchangeDeclare(EXCHANGE_NAME_START, "fanout");
+    Channel channel = connection.createChannel();
+    channel.exchangeDeclare(EXCHANGE_NAME_START, "fanout");
     
-     channel.basicPublish(EXCHANGE_NAME_START, "", null, message.getBytes());
-     System.out.println(" [x] Sent '" + message + "'");
-     channel.close();
-     connection.close();
-     }*/
+    channel.basicPublish(EXCHANGE_NAME_START, "", null, message.getBytes());
+    System.out.println(" [x] Sent '" + message + "'");
+    channel.close();
+    connection.close();
+    }*/
     private static String callP1() throws Exception_Exception {
         callConfig.Provider1_Service service = new callConfig.Provider1_Service();
         callConfig.Provider1 port = service.getProvider1Port();
         return port.test();
     }
-
+    
     private static String callP2() throws callConfigP2.Exception_Exception {
         callConfigP2.Provider2_Service service = new callConfigP2.Provider2_Service();
         callConfigP2.Provider2 port = service.getProvider2Port();
         return port.test();
     }
-
+    
     private static String callP3() throws callConfigP3.Exception_Exception {
         callConfigP3.Provider3_Service service = new callConfigP3.Provider3_Service();
         callConfigP3.Provider3 port = service.getProvider3Port();
         return port.test();
     }
-
+    
     private static String callP4() throws callConfigP4.Exception_Exception {
         callConfigP4.Provider4_Service service = new callConfigP4.Provider4_Service();
         callConfigP4.Provider4 port = service.getProvider4Port();
         return port.test();
     }
-
+    
     private static String callP5() throws callConfigP5.Exception_Exception {
         callConfigP5.Provider5_Service service = new callConfigP5.Provider5_Service();
         callConfigP5.Provider5 port = service.getProvider5Port();
         return port.test();
     }
-
+    
     @Override
     public String sendConfig(String who, String config) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     private static String callC1() throws configC1.Exception_Exception {
         configC1.Consumer1_Service service = new configC1.Consumer1_Service();
         configC1.Consumer1 port = service.getConsumer1Port();
         return port.test();
     }
-
+    
     private static String callC2() throws callConfigC2.Exception_Exception {
         callConfigC2.Consumer2_Service service = new callConfigC2.Consumer2_Service();
         callConfigC2.Consumer2 port = service.getConsumer2Port();
         return port.test();
     }
-
+    
     private static String callC3() throws callConfigC3.Exception_Exception {
         callConfigC3.Consumer3_Service service = new callConfigC3.Consumer3_Service();
         callConfigC3.Consumer3 port = service.getConsumer3Port();
         return port.test();
     }
-
+    
     private static String callC4() throws callConfigC4.Exception_Exception {
         callConfigC4.Consumer4_Service service = new callConfigC4.Consumer4_Service();
         callConfigC4.Consumer4 port = service.getConsumer4Port();
         return port.test();
     }
-
+    
     private static String callC5() throws callConfigC5.Exception_Exception {
         callConfigC5.Consumer5_Service service = new callConfigC5.Consumer5_Service();
         callConfigC5.Consumer5 port = service.getConsumer5Port();
         return port.test();
     }
-
-    public static void logGetter() throws Exception {
+    
+    public static void logGetter() throws java.io.IOException{
         ConnectionFactory factory = new ConnectionFactory();
         LogHandler logHandler = new LogHandler();
         factory.setHost("146.148.27.98");
         factory.setUsername("admin");
         factory.setPassword("adminadmin");
         factory.setPort(5672);
-
+        
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-
+        
         channel.exchangeDeclare(LOG_NAME, "fanout");
         String queueName = channel.queueDeclare().getQueue();
         channel.queueBind(queueName, LOG_NAME, "");
-
+        
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-
+        
         QueueingConsumer consumer = new QueueingConsumer(channel);
         channel.basicConsume(queueName, true, consumer);
         count = 0;
         boolean over = false;
         while (!over) {
-
+            
             QueueingConsumer.Delivery delivery = null;
             try {
                 delivery = consumer.nextDelivery();
@@ -345,33 +362,53 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
                     count++;
                 }
                 logHandler.add(message);
-
-                System.out.println(logHandler);
+                System.out.print(Thread.currentThread().getId()+" ");
+                
             } catch (InterruptedException interruptedException) {
                 System.out.println("finished");
-                Thread.currentThread().stop();
-                over = true;
+                System.out.println(logHandler);
+                
+                System.out.println(logHandler);
+                Thread.currentThread().interrupt();
+                System.out.println(Thread.currentThread().getId()+" ");
+                break;
+                // Thread.currentThread().stop();
+                // over = true;
             } catch (ShutdownSignalException shutdownSignalException) {
                 System.out.println("finished");
-                Thread.currentThread().stop();
+                // Thread.currentThread().stop();
                 over = true;
             } catch (ConsumerCancelledException consumerCancelledException) {
                 System.out.println("finished");
-                Thread.currentThread().stop();
+                //  Thread.currentThread().stop();
                 over = true;
             } catch (IllegalMonitorStateException e) {
                 System.out.println("finished");
-                Thread.currentThread().stop();
+                // Thread.currentThread().stop();
                 over = true;
             }
-
+            
         }
+        System.out.println("before close");
+        channel.close();
+        connection.close();
         System.out.println("finished handling");
-        return;
+        Result res=logHandler.fillInResultForm(logHandler.getTheLog());
+        ResultHandler resH=new ResultHandler(res);
+        resH.createResultFile("/home/alpha/alphaalpha.xml");
+        final OverlaidBarChart demo = new OverlaidBarChart("Response Time Chart",res);
+        demo.pack();
+        RefineryUtilities.centerFrameOnScreen(demo);
+        demo.setVisible(true);
+        PieChart demo1 = new PieChart("Messages",Integer.parseInt(res.getTotalResult().getLostRequests()));
+        demo1.pack();
+        demo1.setVisible(true);
+        //System.out.println(logHandler);
+        
     }
-
+    
     public static Integer getCount() {
         return count;
     }
-
+    
 }
