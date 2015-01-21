@@ -75,4 +75,33 @@ public class LinkConsumerProvider {
     {
         this.consumerId = consumerId;
     }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final LinkConsumerProvider other = (LinkConsumerProvider) obj;
+        if ((this.averageResponseTime == null) ? (other.averageResponseTime != null) : !this.averageResponseTime.equals(other.averageResponseTime)) {
+            return false;
+        }
+        if ((this.providerId == null) ? (other.providerId != null) : !this.providerId.equals(other.providerId)) {
+            return false;
+        }
+        if ((this.consumerId == null) ? (other.consumerId != null) : !this.consumerId.equals(other.consumerId)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "LinkConsumerProvider{" + "averageResponseTime=" + averageResponseTime + ", providerId=" + providerId + ", consumerId=" + consumerId + '}';
+    }
+    
+    
 }

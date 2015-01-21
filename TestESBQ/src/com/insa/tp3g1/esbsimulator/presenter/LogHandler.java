@@ -68,13 +68,15 @@ public class LogHandler {
         long maxRespTime = 0;
         long minRespTime = Integer.MAX_VALUE;
         long[] avRespTime = new long[theLog.size()];
-        int lostReq = 0;
+        int totalLostReq = 0;
+        int lostReqLink;
         
         long timeTemp=0;
          long timeTempMin=0;
         long averageTemp;
         
         int counter = 0;
+        int emptyLink = 0;
         
         ArrayList<LinkConsumerProvider> listConsProv = new ArrayList<LinkConsumerProvider>();
         LinkConsumerProvider lcp = null;
@@ -85,6 +87,7 @@ public class LogHandler {
         for (Entry<String, HashMap<String, logHelper>> subLog : theLog.entrySet()) {
             // Access to thread
             averageTemp = 0;
+            lostReqLink = 0;
             for (Entry<String, logHelper> smallLog : subLog.getValue().entrySet()) {
                 // Test if the request is lost
                 if (smallLog.getValue().getProcessingTime() != -1) {
@@ -107,13 +110,16 @@ public class LogHandler {
                 }
                 else {
                     // The request is lost
-                    lostReq++;
+                    totalLostReq++;
+                    lostReqLink++;
                 }
                 
             }
             
             // Calcul of the average time for on link Cons Prov
-            averageTemp = averageTemp / subLog.getValue().size();
+            if (averageTemp == 0){
+                averageTemp = averageTemp / (subLog.getValue().size() - lostReqLink);
+            }
             avRespTime[counter] = averageTemp;
             
             // Add the current link Cons Prov to the ArrayList
@@ -128,9 +134,14 @@ public class LogHandler {
         // Calcul of the global average response time
         averageTemp = 0;
         for (int i = 0; i < avRespTime.length; i++){
-            averageTemp += avRespTime[i];
+            if (avRespTime[i] != 0){
+                averageTemp += avRespTime[i];
+            }
+            else {
+                emptyLink++;
+            }
         }
-        averageTemp = averageTemp / (long) avRespTime.length;
+        averageTemp = averageTemp / ((long) (avRespTime.length - emptyLink));
         
         /******************************************/
         
@@ -139,7 +150,7 @@ public class LogHandler {
         
         // /!\ Not sure for the "sec" parameter
         ResponseTime responseTime = new ResponseTime("s", String.valueOf((maxRespTime/PARAM)), String.valueOf((minRespTime/PARAM)));
-        TotalResult totalResult = new TotalResult(String.valueOf((averageTemp/PARAM)), String.valueOf(lostReq), responseTime);
+        TotalResult totalResult = new TotalResult(String.valueOf((averageTemp/PARAM)), String.valueOf(totalLostReq), responseTime);
 
         Result result = new Result(totalResult,
                 listConsProv.toArray(new LinkConsumerProvider[listConsProv.size()]));

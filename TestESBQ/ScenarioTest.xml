@@ -5,15 +5,15 @@
     <consumers>
         <consumers>
             <id>1</id>
-            <requestBySeconde>60</requestBySeconde>
+            <requestBySeconde>13</requestBySeconde>
         </consumers>
         <consumers>
             <id>2</id>
-            <requestBySeconde>70</requestBySeconde>
+            <requestBySeconde>10</requestBySeconde>
         </consumers>
         <consumers>
             <id>3</id>
-            <requestBySeconde>80</requestBySeconde>
+            <requestBySeconde>7</requestBySeconde>
         </consumers>
     </consumers>
     <providers>
