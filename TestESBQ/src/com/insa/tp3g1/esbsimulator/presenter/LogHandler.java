@@ -20,6 +20,7 @@ public class LogHandler {
     private long firstMessageTime;
     private long lastMessageTime;
     private final int  PARAM=1000000;
+    private int nbRequests;
     // link, threadId, logHelper
     private HashMap<String, HashMap<String, logHelper>> theLog;
 
@@ -31,6 +32,10 @@ public class LogHandler {
         return theLog;
     }
 
+    public int getNbRequests() {
+        return nbRequests;
+    }
+ 
     public void add(String log) {
         String[] data = log.split(";");
         // 0 : Id linkProviderConsumer
@@ -89,6 +94,7 @@ public class LogHandler {
             averageTemp = 0;
             lostReqLink = 0;
             for (Entry<String, logHelper> smallLog : subLog.getValue().entrySet()) {
+                nbRequests++;
                 // Test if the request is lost
                 if (smallLog.getValue().getProcessingTime() != -1) {
                     timeTemp = smallLog.getValue().getRecievedTime()
@@ -120,7 +126,7 @@ public class LogHandler {
             // Calcul of the average time for on link Cons Prov
             if (subLog.getValue().size() - lostReqLink > 0){
 //                System.out.println(subLog.getValue().size());
-                averageTemp = averageTemp / (subLog.getValue().size() - lostReqLink);
+                averageTemp = averageTemp / (subLog.getValue().size());
             }
             counter = Integer.parseInt(subLog.getKey());
 //            System.out.println("Hey hey !" + counter);
@@ -153,7 +159,7 @@ public class LogHandler {
         /***** Creation of the Result instance *****/
         
         // /!\ Not sure for the "sec" parameter
-        ResponseTime responseTime = new ResponseTime("s", String.valueOf((maxRespTime/PARAM)), String.valueOf((minRespTime/PARAM)));
+        ResponseTime responseTime = new ResponseTime("ms", String.valueOf((maxRespTime/PARAM)), String.valueOf((minRespTime/PARAM)));
         TotalResult totalResult = new TotalResult(String.valueOf((averageTemp/PARAM)), String.valueOf(totalLostReq), responseTime);
 
         Result result = new Result(totalResult,

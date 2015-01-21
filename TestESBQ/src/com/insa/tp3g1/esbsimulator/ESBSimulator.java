@@ -51,7 +51,7 @@ public class ESBSimulator {
         boolean validationOk = false;
         
         
-     /*   ProcessingTime processingTime = new ProcessingTime(10, "ms");
+      ProcessingTime processingTime = new ProcessingTime(10, "ms");
         DataExchangeSize data = new DataExchangeSize(4, "byte");
         DataExchangeSize data1 = new DataExchangeSize(3, "byte");
         
@@ -65,7 +65,7 @@ public class ESBSimulator {
         
         //test build
         //File xmlFile = new File("ScenarBuild.xml");
-        Scenario scenario;*/
+       // Scenario scenario;*/
          
         Class<?> c = Scenario.class;
         

@@ -400,7 +400,8 @@ public class MessageHandler extends Thread implements MessageHandlerReceiver, Me
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
-        PieChart demo1 = new PieChart("Messages",Integer.parseInt(res.getTotalResult().getLostRequests()));
+       int lost=Integer.parseInt(res.getTotalResult().getLostRequests())/logHandler.getNbRequests();
+       PieChart demo1 = new PieChart("Messages",lost*100);
         demo1.pack();
         demo1.setVisible(true);
         //System.out.println(logHandler);
