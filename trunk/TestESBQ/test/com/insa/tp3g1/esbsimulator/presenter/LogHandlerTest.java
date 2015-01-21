@@ -127,8 +127,8 @@ public class LogHandlerTest {
         littleHelper.setProcessingTime(3);
         littleHelper.setSentTime(30*1000000);
         littleHelper.setRecievedTime(34*1000000);
-        lineOfLog.put("3", littleHelper);
-        theLog.put("24", lineOfLog);
+        lineOfLog.put("34", littleHelper);
+        theLog.put("2", lineOfLog);
         
         /*** Creation of the expected scenario ***/
         ResponseTime responseTime = new ResponseTime("s", "1", "1");
