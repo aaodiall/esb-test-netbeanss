@@ -21,7 +21,7 @@ import javax.xml.bind.JAXBException;
  */
 public class TestHMI {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JAXBException {
     
         File xmlFile = new File("ScenarBuild.xml");
         HMI hmi = new HMI();
@@ -36,6 +36,8 @@ public class TestHMI {
 //                ex.printStackTrace();
         } 
     
+        
     }
+            
     
 }

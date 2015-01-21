@@ -16,6 +16,7 @@ import com.insa.tp3g1.esbsimulator.presenter.ParserHandler;
 import com.insa.tp3g1.esbsimulator.presenter.ResultHandler;
 import com.insa.tp3g1.esbsimulator.presenter.ValidatorHandler;
 import com.insa.tp3g1.esbsimulator.test.TestXML;
+import com.insa.tp3g1.esbsimulator.view.HMI;
 import com.insa.tp3g1.esbsimulator.view.MessageHandler;
 import static com.insa.tp3g1.esbsimulator.view.MessageHandler.sendConfig1;
 import com.insa.tp3g1.esbsimulator.view.Observer;
@@ -45,7 +46,7 @@ public class ESBSimulator {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws JAXBException  {
         // TODO code application logic here
         boolean validationOk = false;
         
@@ -65,15 +66,17 @@ public class ESBSimulator {
         //test build
         //File xmlFile = new File("ScenarBuild.xml");
         Scenario scenario;*/
-         File xmlFile = new File("ScenarioTest.xml");
+         
         Class<?> c = Scenario.class;
         
-        Scenario scenario;
-        
+        File xmlFile = new File("ScenarBuild.xml");
+        HMI hmi = new HMI();
+        Scenario scenario = hmi.createScenario();
         
         try {
            // scenario = new Scenario(1, providers, 2, "scenario", consumers);
-            scenario =(Scenario) ParserHandler.getInstanceFromXmlFile(xmlFile, Scenario.class);
+            //scenario =(Scenario) ParserHandler.getInstanceFromXmlFile(xmlFile, Scenario.class);
+            BuilderHandler.createXmlFileFromObject(xmlFile, scenario);
             MessageHandler.providerHandler(scenario);
             /*new Thread(){
             @Override
