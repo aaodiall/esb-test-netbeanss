@@ -5,15 +5,14 @@
  */
 package com.insa.tp3g1.esbsimulator.presenter;
 
+
 import com.insa.tp3g1.esbsimulator.model.scenario.Consumer;
 import com.insa.tp3g1.esbsimulator.model.scenario.DataExchangeSize;
 import com.insa.tp3g1.esbsimulator.model.scenario.ProcessingTime;
 import com.insa.tp3g1.esbsimulator.model.scenario.Provider;
 import com.insa.tp3g1.esbsimulator.model.scenario.Scenario;
 import com.insa.tp3g1.esbsimulator.view.HMI;
-import java.io.File;
 import java.util.ArrayList;
-import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -57,27 +56,45 @@ public class HMITest {
      */
     @Test
     public void testCreateScenario() throws Exception {
-        System.out.println("createSenario");
-        
-        File fileToBuild = new File("ScenarBuild.xml");
-        File expectedOutput = new File("JUnitScenarBuild.xml");
-        
-        //create objects to create xml files
-        HMI hmi = new HMI();
-        Scenario scenario = hmi.createScenario();
-        
-
-        //build xml from objects
-        BuilderHandler.createXmlFileFromObject(fileToBuild, scenario);
-                
-        //compare files
-        boolean compare = FileUtils.contentEquals(fileToBuild, expectedOutput);
+        System.out.println("Test createSenario: ");
        
-        System.err.println(fileToBuild.getAbsoluteFile()+" "+expectedOutput.getAbsoluteFile());
+        //create scenario to test
+        HMI hmi = new HMI();
+        Scenario result = hmi.createScenario();
         
-        if(!compare) {
-            fail("XML output file is different from what is expected.");
-        }
+    
+        /********* Creation of the solution expected *********/
+        int id = 1;
+        int coupleConsProv = 3;
+        
+        // Consumers
+        ArrayList<Consumer> consumers = new ArrayList<Consumer>();
+        consumers.add(new Consumer(1, 13));
+        consumers.add(new Consumer(2, 10));
+        consumers.add(new Consumer(3, 7));
+        
+        // Providers
+        ArrayList<Provider> providers = new ArrayList<Provider>();
+        
+        DataExchangeSize data = new DataExchangeSize(20, "byte");
+        ProcessingTime processingTime = new ProcessingTime(6, "ms");
+        providers.add(new Provider(1, processingTime, data));
+	
+        data = new DataExchangeSize(21, "byte");
+        processingTime = new ProcessingTime(9, "ms");
+        providers.add(new Provider(2, processingTime, data));
+
+        data = new DataExchangeSize(22, "byte");
+        processingTime = new ProcessingTime(12, "ms");
+        providers.add(new Provider(3, processingTime, data));
+        
+        // Scenario
+        Scenario scenario = new Scenario(17, providers, coupleConsProv, "test1", consumers);
+        
+        /*********************************************************/
+        
+        assertEquals(scenario, result);
+        
     }
 
 }

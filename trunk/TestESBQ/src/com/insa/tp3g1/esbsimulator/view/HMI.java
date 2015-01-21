@@ -12,7 +12,6 @@ import com.insa.tp3g1.esbsimulator.model.scenario.Provider;
 import com.insa.tp3g1.esbsimulator.model.scenario.Scenario;
 import com.insa.tp3g1.esbsimulator.presenter.ParserHandler;
 import java.io.File;
-import static java.lang.System.exit;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
